@@ -1,0 +1,16 @@
+{
+  "name": "telegram-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "request": "^2.64.0",
+    "supervisor": "^0.9.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js",
+    "watch": "./node_modules/.bin/supervisor -i node_modules index.js"
+  },
+  "license": "ISC"
+}
