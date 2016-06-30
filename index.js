@@ -2,8 +2,9 @@
 
 var path = require('path');
 var request = require('request');
-
-var TOKEN = '139139425:AAFDc-RHpEKxH7etQr92o5MkCmz7HaMKCos';
+var fs = require('fs');
+var config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+var TOKEN = config.token;
 
 var baseRequest = request.defaults({
     baseUrl: 'https://api.telegram.org/bot' + TOKEN + '/'
