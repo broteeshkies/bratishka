@@ -7,10 +7,14 @@
     "request": "^2.64.0",
     "supervisor": "^0.9.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.10.1",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-2": "^6.11.0"
+  },
   "scripts": {
     "start": "node index.js",
-    "watch": "./node_modules/.bin/supervisor -i node_modules index.js"
+    "dev": "TOKEN=139139425:AAFDc-RHpEKxH7etQr92o5MkCmz7HaMKCos nodemon index.js --exec babel-node --presets es2015,stage-2"
   },
   "license": "ISC"
 }
