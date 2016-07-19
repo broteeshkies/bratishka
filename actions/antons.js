@@ -6,6 +6,7 @@ export default class AntonsAction extends Action {
   }
 
   doAction(message) {
-    this.bot.sendMessage(message.from.id, 'Борисович');
+    const chatId = message.chat.id || message.from.id;
+    this.bot.sendMessage(chatId, 'Борисович');
   }
 }

@@ -6,7 +6,8 @@ import TelegramBot from 'node-telegram-bot-api';
 const token = process.env.TOKEN;
 
 const actionClasses = [
-    require('./actions/antons').default,
+  require('./actions/antons').default,
+  require('./actions/counter').default
 ];
 
 const bot = new TelegramBot(token, { polling: true });
