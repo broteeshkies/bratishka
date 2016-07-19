@@ -12,7 +12,9 @@ const token = process.env.TOKEN;
 
 const actionClasses = [
   require('./actions/antons').default,
-  require('./actions/odnoklassniki').default
+  require('./actions/odnoklassniki').default,
+  require('./actions/bratishka').default,
+  require('./actions/tuesday').default,
 ];
 
 const bot = new TelegramBot(token, { polling: true });
