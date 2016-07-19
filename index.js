@@ -1,4 +1,9 @@
 //var path = require('path');
+//
+//
+import 'babel-polyfill';
+import 'isomorphic-fetch';
+
 import path from 'path';
 import request from 'request';
 import fs from 'fs';
@@ -7,7 +12,7 @@ const token = process.env.TOKEN;
 
 const actionClasses = [
   require('./actions/antons').default,
-  require('./actions/counter').default
+  require('./actions/odnoklassniki').default
 ];
 
 const bot = new TelegramBot(token, { polling: true });
