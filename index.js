@@ -15,6 +15,9 @@ const actionClasses = [
   require('./actions/odnoklassniki').default,
   require('./actions/bratishka').default,
   require('./actions/tuesday').default,
+  require('./actions/bratbratan').default,
+  require('./actions/counter').default,
+  require('./actions/mgbeta').default,
 ];
 
 const bot = new TelegramBot(token, { polling: true });

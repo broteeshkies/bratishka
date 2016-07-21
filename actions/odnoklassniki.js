@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 export default class OkAction extends Action {
   test(message) {
-    if (message.text && this.sendLimiter(1, 10)) return true;
+    if (message.text && this.sendLimiter(1, 5)) return true;
     return false;
   }
 
@@ -15,36 +15,24 @@ export default class OkAction extends Action {
     const firstWord = message.text.match(/[a-zA-Zа-яА-ЯёЁ]+/)[0] || "йцу";
     console.log(firstWord);
     // try{
-      const url = 'http://stavklass.ru/images/autocomplete.json?term=' + encodeURI(firstWord)
-    // } catch(e) {
-    //   console.log(e);
-    // }
+    const url = 'http://stavklass.ru/images/autocomplete.json?term=' + encodeURI(firstWord)
+      // } catch(e) {
+      //   console.log(e);
+      // }
 
     fetch(url)
-    .then(function(response) {
+      .then(function(response) {
         if (response.status >= 400) {
-            throw new Error("Bad response from server");
+          throw new Error("Bad response from server");
         }
         return response.json();
-    })
-    .then(function(stories) {
-      if (!stories.length) return;
-      const story = _.shuffle(stories)[0]
-      bot.sendMessage(chatId, story)
-        // console.log(stories);
-    });
-
-    // bot.sendMessage(chatId, counter)
-    //   .then(function (sended) {
-    //     console.log(sended);
-    //     let chatId = sended.chat.id;
-    //     let messageId = sended.message_id;
-    //
-    //     setInterval(function () {
-    //       bot.editMessageText(++counter, { chat_id: chatId, message_id: messageId });
-    //     }, 1000);
-    //
-    //   });
+      })
+      .then(function(stories) {
+        if (!stories.length) return;
+        const story = _.shuffle(stories)[0]
+        bot.sendMessage(chatId, story)
+          // console.log(stories);
+      });
   }
 
   sendLimiter(min, max) {
