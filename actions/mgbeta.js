@@ -1,6 +1,6 @@
 import Action from './Action';
 const mgbetaChatId = -1001042071273;
-export default class BatishkaAction extends Action {
+export default class MgbetaAction extends Action {
   test (message) {
     return this.testMessageRegExp(message, /^mgbeta/);
   }
