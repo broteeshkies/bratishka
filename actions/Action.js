@@ -8,4 +8,16 @@ export default class Action {
     var text = message.text.toLowerCase();
     return text.match(regExp);
   }
+
+  letter = '[a-zA-Zа-яА-ЯёЁ0-9]'
+  notletter = '[^a-zA-Zа-яА-ЯёЁ0-9]'
+
+  wordBoundary(text, word){
+    text.toLowerCase();
+    const regExp = new RegExp("\\s" + word + "\\s", "g");
+    text.replace(new RegExp(this.notletter, 'g'), ' ');
+    text = " " + text + " ";
+    console.log(text, text.match(regExp));
+    return text.match(regExp);
+  }
 }

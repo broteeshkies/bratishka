@@ -9,6 +9,10 @@ export default class BatishkaAction extends Action {
     const text = message.text.substr(7);
     // console.log(message)
     // const chatId = message.chat.id || message.from.id;
+    const firstName = message.from.first_name;
+    const lastName = message.from.last_name;
+    const username = message.from.username;
+    console.log("[mgbeta] " + firstName + " " + lastName + " (" + username + "): " + text);
     this.bot.sendMessage(mgbetaChatId, text);
   }
 }
