@@ -9,6 +9,11 @@ export default class Action {
     return text.match(regExp);
   }
 
+  testGroupId(message, id){
+    const chatId = message.chat.id || message.from.id;
+    return chatId == id;
+  }
+
   letter = '[a-zA-Zа-яА-ЯёЁ0-9]'
   notletter = '[^a-zA-Zа-яА-ЯёЁ0-9]'
 

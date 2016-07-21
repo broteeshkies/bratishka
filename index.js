@@ -20,6 +20,7 @@ const actionClasses = [
   require('./actions/mgbeta').default,
   require('./actions/mbox').default,
   require('./actions/boobs').default,
+  require('./actions/today').default,
 ];
 
 const bot = new TelegramBot(token, { polling: true });
