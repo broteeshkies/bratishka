@@ -3,6 +3,8 @@
 //
 import 'babel-polyfill';
 import 'isomorphic-fetch';
+import dotenv from 'dotenv';
+dotenv.load();
 
 import path from 'path';
 import request from 'request';

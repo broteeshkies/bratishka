@@ -22,7 +22,6 @@ export default class Action {
     const regExp = new RegExp("\\s" + word + "\\s", "g");
     text = text.replace(new RegExp(this.notletter, 'g'), ' ');
     text = " " + text + " ";
-    console.log(text, text.match(regExp));
     return text.match(regExp);
   }
 }

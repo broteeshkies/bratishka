@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "dotenv": "^2.0.0",
     "es6-promise": "^3.2.1",
     "isomorphic-fetch": "^2.2.1",
     "request": "^2.64.0",
@@ -15,8 +16,9 @@
     "babel-preset-stage-0": "^6.5.0"
   },
   "scripts": {
-    "start": "node index.js",
-    "dev": "TOKEN=139139425:AAFDc-RHpEKxH7etQr92o5MkCmz7HaMKCos nodemon index.js --exec babel-node --presets es2015,stage-0"
+    "start": "nodemon src/index.js --exec babel-node",
+    "build": "babel src -d dist",
+    "dev": "nodemon index.js --exec babel-node --presets es2015,stage-0"
   },
   "license": "ISC"
 }
