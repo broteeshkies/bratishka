@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 export default class OkAction extends Action {
   test(message) {
-    if (message.text && this.sendLimiter(1, 5)) return true;
+    if (message.text && this.sendLimiter(1, 20)) return true;
     return false;
   }
 

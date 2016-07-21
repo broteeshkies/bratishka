@@ -18,6 +18,8 @@ const actionClasses = [
   require('./actions/bratbratan').default,
   require('./actions/counter').default,
   require('./actions/mgbeta').default,
+  require('./actions/mbox').default,
+  require('./actions/boobs').default,
 ];
 
 const bot = new TelegramBot(token, { polling: true });
