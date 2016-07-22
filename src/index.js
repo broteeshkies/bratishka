@@ -27,27 +27,28 @@ const actionClasses = [
 ];
 
 const bot = new TelegramBot(token, { polling: true });
+const freshDate = Date.now();
 
 const actions = actionClasses.map(function (ActionClass) {
   return new ActionClass(bot);
 });
 
 // Matches /echo [whatever]
-bot.onText(/\/echo (.+)/, function (msg, match) {
-    const fromId = msg.from.id;
+bot.onText(/\/echo (.+)/, function (message, match) {
+    const fromId = message.from.id;
     const resp = match[1];
-    console.log(msg.from.id);
+    console.log(message.from.id);
     bot.sendMessage(fromId, resp);
   });
 
 // Any kind of message
-bot.on('message', function (msg) {
-
-    actions.forEach(function (action) {
-        if (action.test(msg)) {
-          action.doAction(msg);
-        }
-      });
-
-    return false;
+bot.on('message', function (message) {
+  if (message.date * 1000 < freshDate) return false;
+  actions.forEach(function (action) {
+    if (action.test(message)) {
+      action.doAction(message);
+    }
   });
+
+  return false;
+});
