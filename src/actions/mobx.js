@@ -1,8 +1,8 @@
 import Action from './Action';
 
-export default class MboxAction extends Action {
+export default class MobxAction extends Action {
   test (message) {
-    return this.testMessageRegExp(message, /\bmbox\b/);
+    return this.testMessageRegExp(message, /\bmobx\b/);
   }
 
   doAction(message) {
