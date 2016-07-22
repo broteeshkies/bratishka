@@ -24,6 +24,7 @@ const actionClasses = [
   require('./actions/boobs').default,
   require('./actions/today').default,
   require('./actions/win').default,
+  require('./actions/satan').default,
 ];
 
 const bot = new TelegramBot(token, { polling: true });
@@ -37,12 +38,13 @@ const actions = actionClasses.map(function (ActionClass) {
 bot.onText(/\/echo (.+)/, function (message, match) {
     const fromId = message.from.id;
     const resp = match[1];
-    console.log(message.from.id);
+    console.log(message);
     bot.sendMessage(fromId, resp);
   });
 
 // Any kind of message
 bot.on('message', function (message) {
+  // console.log(message);
   if (message.date * 1000 < freshDate) return false;
   actions.forEach(function (action) {
     if (action.test(message)) {
