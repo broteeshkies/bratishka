@@ -3,13 +3,12 @@
 //
 import 'babel-polyfill';
 import 'isomorphic-fetch';
-import dotenv from 'dotenv';
-dotenv.load();
-
 import path from 'path';
 import request from 'request';
 import fs from 'fs';
 import TelegramBot from 'node-telegram-bot-api';
+import dotenv from 'dotenv';
+dotenv.config({silent: true});
 const token = process.env.TOKEN;
 
 const actionClasses = [
@@ -54,3 +53,4 @@ bot.on('message', function (message) {
 
   return false;
 });
+console.log('Bot successful runned');
