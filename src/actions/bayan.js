@@ -18,8 +18,6 @@ export default class BayanAction extends Action {
   ]
 
   test (message) {
-    console.log(message.photo);
-    console.log(this.sendLimiter(1, 10));
     if (message.photo && this.sendLimiter(1, 10)) return true;
     return false;
   }
