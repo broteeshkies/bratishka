@@ -15,6 +15,8 @@ const actionClasses = [
   require('./actions/antons').default,
   require('./actions/odnoklassniki').default,
   require('./actions/bratishka').default,
+  require('./actions/azazaz').default,
+  require('./actions/bayan').default,
   require('./actions/tuesday').default,
   require('./actions/bratbratan').default,
   require('./actions/counter').default,

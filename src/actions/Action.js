@@ -24,4 +24,16 @@ export default class Action {
     text = " " + text + " ";
     return text.match(regExp);
   }
+
+  randomInteger(min, max) {
+    let rand = min - 0.5 + Math.random() * (max - min + 1)
+    rand = Math.round(rand);
+    return rand;
+  }
+
+  sendLimiter(min, max) {
+    var rand = min - 0.5 + Math.random() * (max - min + 1)
+    rand = Math.round(rand);
+    return rand == max;
+  }
 }
