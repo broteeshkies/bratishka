@@ -21,7 +21,7 @@ const actionClasses = [
   require('./actions/bratbratan').default,
   require('./actions/counter').default,
   require('./actions/mgbeta').default,
-  require('./actions/mobx').default,
+  // require('./actions/mobx').default,
   require('./actions/boobs').default,
   require('./actions/today').default,
   require('./actions/win').default,
