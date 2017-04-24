@@ -11,6 +11,7 @@
   ],
   "main": "index.js",
   "dependencies": {
+    "babel-polyfill": "^6.23.0",
     "dotenv": "^2.0.0",
     "isomorphic-fetch": "^2.2.1",
     "node-telegram-bot-api": "^0.23.3"
@@ -31,9 +32,9 @@
     "eslint-plugin-react": "6.9.0"
   },
   "scripts": {
-    "start": "node dist/index.js",
-    "babel-build": "rm -rf dist && mkdir dist && cp {package.json,yarn.lock,README.md} dist/ && babel src --out-dir dist --source-maps inline --copy-files",
+    "start": "node index.js",
+    "build": "rm -rf build && mkdir build && cp {package.json,yarn.lock,README.md} build/ && babel src --out-dir build --source-maps inline --copy-files",
     "dev": "babel-node src/index.js",
-    "babel-dev-build": "DEBUG=1 npm run babel-build -- --watch"
+    "dev-build": "DEBUG=1 npm run build -- --watch"
   }
 }
