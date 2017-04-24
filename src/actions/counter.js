@@ -5,7 +5,7 @@ const animation = [
   '☝️  😄  👍',
   '💪  😄  👉',
   '🖕  😄  🖕',
-]
+];
 
 export default class CounterAction extends Action {
   test(message) {
@@ -13,29 +13,27 @@ export default class CounterAction extends Action {
   }
 
   doAction(message) {
-    var counter = 0;
+    let counter = 0;
     const bot = this.bot;
     console.log(message);
-    let chatId = message.chat.id || message.from.id;
-    bot.sendMessage(chatId, "💥💥💥💥💥!!!В Н И М А Н И Е!!!💥💥💥💥💥")
-      .then(function (sended) {
+    const chatId = message.chat.id || message.from.id;
+    bot.sendMessage(chatId, '💥💥💥💥💥!!!В Н И М А Н И Е!!!💥💥💥💥💥')
+      .then((sended) => {
         console.log(sended);
-        let chatId = sended.chat.id;
-        let messageId = sended.message_id;
+        const chatId = sended.chat.id;
+        const messageId = sended.message_id;
 
-        const intervalId = setInterval(function () {
+        const intervalId = setInterval(() => {
           const msg = animation[counter % animation.length];
           bot.editMessageText(msg, { chat_id: chatId, message_id: messageId });
-          if(counter > animation.length * 2) {
-            clearInterval(intervalId)
-            setTimeout(function () {
-              bot.editMessageText('*DELETED*', { chat_id: chatId, message_id: messageId, parse_mode: 'Markdown'})
-            }, 1000)
-
+          if (counter > animation.length * 2) {
+            clearInterval(intervalId);
+            setTimeout(() => {
+              bot.editMessageText('*DELETED*', { chat_id: chatId, message_id: messageId, parse_mode: 'Markdown' });
+            }, 1000);
           }
-          counter += 1
+          counter += 1;
         }, 1000);
-
       });
   }
 }

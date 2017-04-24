@@ -14,16 +14,16 @@ export default class BayanAction extends Action {
     'аффтар жжошь',
     'баянище',
     'ну это ваще баян',
-    'За тобой уже выехали...'
+    'За тобой уже выехали...',
   ]
 
-  test (message) {
+  test(message) {
     if (message.photo && this.sendLimiter(1, 10)) return true;
     return false;
   }
 
   doAction(message) {
     const chatId = message.chat.id || message.from.id;
-    this.bot.sendMessage(chatId, this.messages[this.randomInteger(0, this.messages.length-1)]);
+    this.bot.sendMessage(chatId, this.messages[this.randomInteger(0, this.messages.length - 1)]);
   }
 }

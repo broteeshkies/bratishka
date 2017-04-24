@@ -1,7 +1,7 @@
 import Action from './Action';
 const mgbetaChatId = -1001042071273;
 export default class MgbetaAction extends Action {
-  test (message) {
+  test(message) {
     return this.testMessageRegExp(message, /^mgbeta/);
   }
 
@@ -12,7 +12,7 @@ export default class MgbetaAction extends Action {
     const firstName = message.from.first_name;
     const lastName = message.from.last_name;
     const username = message.from.username;
-    console.log("[mgbeta] " + firstName + " " + lastName + " (" + username + "): " + text);
+    console.log(`[mgbeta] ${firstName} ${lastName} (${username}): ${text}`);
     this.bot.sendMessage(mgbetaChatId, text);
   }
 }

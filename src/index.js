@@ -1,13 +1,10 @@
-//var path = require('path');
-//
-//
 import 'babel-polyfill';
 import 'isomorphic-fetch';
 import path from 'path';
 import fs from 'fs';
 import TelegramBot from 'node-telegram-bot-api';
 import dotenv from 'dotenv';
-dotenv.config({silent: true});
+dotenv.config({ silent: true });
 const token = process.env.TOKEN;
 
 const actionClasses = [
@@ -30,23 +27,23 @@ const actionClasses = [
 const bot = new TelegramBot(token, { polling: true });
 const freshDate = Date.now();
 
-const actions = actionClasses.map(function (ActionClass) {
+const actions = actionClasses.map((ActionClass) => {
   return new ActionClass(bot);
 });
 
 // Matches /echo [whatever]
-bot.onText(/\/echo (.+)/, function (message, match) {
-    const fromId = message.from.id;
-    const resp = match[1];
-    console.log(message);
-    bot.sendMessage(fromId, resp);
-  });
+bot.onText(/\/echo (.+)/, (message, match) => {
+  const fromId = message.from.id;
+  const resp = match[1];
+  // console.log(message);
+  bot.sendMessage(fromId, resp);
+});
 
 // Any kind of message
-bot.on('message', function (message) {
+bot.on('message', (message) => {
   // console.log(message);
   if (message.date * 1000 < freshDate) return false;
-  actions.forEach(function (action) {
+  actions.forEach((action) => {
     if (action.test(message)) {
       action.doAction(message);
     }

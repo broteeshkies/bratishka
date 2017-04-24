@@ -11,12 +11,12 @@ export default class AzazaAction extends Action {
     'x-DDDDDDDDDDDDDDDDDDDDDDDDDDD',
   ]
 
-  test (message) {
+  test(message) {
     return this.testMessageRegExp(message, /\){4,}/);
   }
 
   doAction(message) {
     const chatId = message.chat.id || message.from.id;
-    this.bot.sendMessage(chatId, this.messages[this.randomInteger(0, this.messages.length-1)]);
+    this.bot.sendMessage(chatId, this.messages[this.randomInteger(0, this.messages.length - 1)]);
   }
 }

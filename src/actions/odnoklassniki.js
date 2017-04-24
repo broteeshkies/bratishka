@@ -10,27 +10,27 @@ export default class OkAction extends Action {
 
   async doAction(message) {
     const bot = this.bot;
-    let chatId = message.chat.id || message.from.id;
+    const chatId = message.chat.id || message.from.id;
     // console.log(message.text, message.text.match(/\w+/u));
-    const firstWord = message.text.match(/[a-zA-Zа-яА-ЯёЁ]+/)[0] || "йцу";
+    const firstWord = message.text.match(/[a-zA-Zа-яА-ЯёЁ]+/)[0] || 'йцу';
     console.log(firstWord);
     // try{
-    const url = 'http://stavklass.ru/images/autocomplete.json?term=' + encodeURI(firstWord)
+    const url = `http://stavklass.ru/images/autocomplete.json?term=${encodeURI(firstWord)}`;
       // } catch(e) {
       //   console.log(e);
       // }
 
     fetch(url)
-      .then(function(response) {
+      .then((response) => {
         if (response.status >= 400) {
-          throw new Error("Bad response from server");
+          throw new Error('Bad response from server');
         }
         return response.json();
       })
-      .then(function(stories) {
+      .then((stories) => {
         if (!stories.length) return;
-        const story = _.shuffle(stories)[0]
-        bot.sendMessage(chatId, story)
+        const story = _.shuffle(stories)[0];
+        bot.sendMessage(chatId, story);
           // console.log(stories);
       });
   }

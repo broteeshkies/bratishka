@@ -1,7 +1,7 @@
 import Action from './Action';
 
 export default class MobxAction extends Action {
-  test (message) {
+  test(message) {
     return this.testMessageRegExp(message, /\bmobx\b/);
   }
 
