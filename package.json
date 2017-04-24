@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Добавляйте меня в телеграм чатики Братаны, искренне ваш @BratishkaBot https://t.me/BratishkaBot",
   "repository": "mgbeta/bratishka",
-  "author": "Nata <natavts@gmial.com> & Igor Suvorov <hi@isuvorov.ru>",
+  "author": "Nata <natavts@gmial.com> && Igor Suvorov <hi@isuvorov.ru>",
   "license": "MIT",
   "keywords": [
     "telegram",
@@ -33,6 +33,7 @@
   "scripts": {
     "start": "node dist/index.js",
     "babel-build": "rm -rf dist && mkdir dist && cp {package.json,yarn.lock,README.md} dist/ && babel src --out-dir dist --source-maps inline --copy-files",
-    "dev": "DEBUG=1 npm run babel-build -- --watch"
+    "dev": "babel-node src/index.js",
+    "babel-dev-build": "DEBUG=1 npm run babel-build -- --watch"
   }
 }
