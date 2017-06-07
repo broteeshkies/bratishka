@@ -6,7 +6,6 @@ export default class BratanAction extends Action {
   }
 
   doAction(message) {
-    const chatId = message.chat.id || message.from.id;
     const text = message.text.toLowerCase();
 
     let res;
@@ -18,7 +17,7 @@ export default class BratanAction extends Action {
     } else {
       return false;
     }
-    this.bot.sendMessage(chatId, res);
+    this.sendMessage(message, res);
   }
 
 

@@ -9,8 +9,7 @@ export default class OkAction extends Action {
   }
 
   async doAction(message) {
-    const bot = this.bot;
-    const chatId = message.chat.id || message.from.id;
+    const bot = this;
     // console.log(message.text, message.text.match(/\w+/u));
     const firstWord = message.text.match(/[a-zA-Zа-яА-ЯёЁ]+/)[0] || 'йцу';
     console.log(firstWord);
@@ -30,7 +29,7 @@ export default class OkAction extends Action {
       .then((stories) => {
         if (!stories.length) return;
         const story = _.shuffle(stories)[0];
-        bot.sendMessage(chatId, story);
+        bot.sendMessage(message, story);
           // console.log(stories);
       });
   }

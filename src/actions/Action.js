@@ -36,4 +36,22 @@ export default class Action {
     rand = Math.round(rand);
     return rand == max;
   }
+
+  percentProbability(percent) {
+    let rand = 0 - 0.5 + Math.random() * (100 - 0 + 1);
+    rand = Math.round(rand);
+    return rand <= percent;
+  }
+
+  sendMessage(msg, text, delay=this.randomInteger(1,5) * 1000) {
+    const chatId = msg.chat.id || msg.from.id;
+    const bot = this.bot;
+    const opt = this.percentProbability(25) ? {
+      reply_to_message_id: msg.message_id
+    } : {};
+
+    setTimeout(function () {
+      bot.sendMessage(chatId, text, opt);
+    }, delay);
+  }
 }
