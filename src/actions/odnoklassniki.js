@@ -10,14 +10,9 @@ export default class OkAction extends Action {
 
   async doAction(message) {
     const bot = this;
-    // console.log(message.text, message.text.match(/\w+/u));
-    const firstWord = message.text.match(/[a-zA-Zа-яА-ЯёЁ]+/)[0] || 'йцу';
-    console.log(firstWord);
-    // try{
+    const firstWord = _.shuffle(message.text.split(' '))[0].match(/[a-zA-Zа-яА-ЯёЁ]+/)[0];
+    // console.log(firstWord);
     const url = `http://stavklass.ru/images/autocomplete.json?term=${encodeURI(firstWord)}`;
-      // } catch(e) {
-      //   console.log(e);
-      // }
 
     fetch(url)
       .then((response) => {
