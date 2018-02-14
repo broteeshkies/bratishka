@@ -43,7 +43,7 @@ export default class Action {
     return rand <= percent;
   }
 
-  sendMessage(msg, text, delay=this.randomInteger(1,5) * 1000) {
+  sendMessage(msg, text, delay=this.randomInteger(1,5) * 500) {
     const chatId = msg.chat.id || msg.from.id;
     const bot = this.bot;
     const opt = this.percentProbability(25) ? {

@@ -1,11 +1,23 @@
 import 'babel-polyfill';
 import 'isomorphic-fetch';
+import './fix';
 import path from 'path';
 import fs from 'fs';
+// import Promise from 'bluebird';
 import TelegramBot from 'node-telegram-bot-api';
 import dotenv from 'dotenv';
 dotenv.config({ silent: true });
 const token = process.env.TOKEN;
+process.env["NTBA_FIX_319"] = 1;
+
+// Promise.config = () => {}; // херов багфикс для телеграма
+// let TelegramBot;
+// try {
+//   TelegramBot = require('node-telegram-bot-api');
+// } catch (err) {
+//   console.log('TelegramBot init', err);
+// }
+
 
 const actionClasses = [
   require('./actions/antons').default,
