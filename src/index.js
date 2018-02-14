@@ -41,7 +41,7 @@ bot.onText(/\/echo (.+)/, (message, match) => {
 
 // Any kind of message
 bot.on('message', (message) => {
-  // console.log(message);
+  console.log('M: ', message);
   if (message.date * 1000 < freshDate) return false;
   actions.forEach((action) => {
     if (action.test(message)) {
