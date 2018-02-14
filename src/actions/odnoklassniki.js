@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 export default class OkAction extends Action {
   test(message) {
-    if (message.text && this.sendLimiter(1, 20)) return true;
+    if (message.text && this.percentProbability(5)) return true;
     return false;
   }
 
@@ -24,7 +24,7 @@ export default class OkAction extends Action {
       .then((stories) => {
         if (!stories.length) return;
         const story = _.shuffle(stories)[0];
-        bot.sendMessage(message, story);
+        this.sendMessage(message, story);
           // console.log(stories);
       });
   }

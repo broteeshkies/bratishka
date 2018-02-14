@@ -15,11 +15,9 @@ export default class CounterAction extends Action {
   doAction(message) {
     let counter = 0;
     const bot = this.bot;
-    console.log(message);
     const chatId = message.chat.id || message.from.id;
     bot.sendMessage(chatId, '💥💥💥💥💥!!!В Н И М А Н И Е!!!💥💥💥💥💥')
       .then((sended) => {
-        console.log(sended);
         const chatId = sended.chat.id;
         const messageId = sended.message_id;
 

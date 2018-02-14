@@ -15,6 +15,6 @@ export default class BatishkaAction extends Action {
   }
 
   doAction(message) {
-    this.sendMessage(message, this.messages[this.randomInteger(0, this.messages.length - 1)], 1500);
+    this.sendMessage(message, sample(this.messages));
   }
 }

@@ -1,6 +1,6 @@
-import 'babel-polyfill';
-import 'isomorphic-fetch';
+// import 'babel-polyfill';
 import './fix';
+import 'isomorphic-fetch';
 import path from 'path';
 import fs from 'fs';
 // import Promise from 'bluebird';
@@ -8,7 +8,6 @@ import TelegramBot from 'node-telegram-bot-api';
 import dotenv from 'dotenv';
 dotenv.config({ silent: true });
 const token = process.env.TOKEN;
-process.env["NTBA_FIX_319"] = 1;
 
 // Promise.config = () => {}; // херов багфикс для телеграма
 // let TelegramBot;
@@ -29,7 +28,7 @@ const actionClasses = [
   require('./actions/bratbratan').default,
   require('./actions/counter').default,
   require('./actions/mgbeta').default,
-  // require('./actions/mobx').default,
+  require('./actions/mobx').default,
   require('./actions/boobs').default,
   require('./actions/today').default,
   require('./actions/win').default,
@@ -53,7 +52,10 @@ bot.onText(/\/echo (.+)/, (message, match) => {
 
 // Any kind of message
 bot.on('message', (message) => {
-  console.log('M: ', message);
+  // console.log('M: ', message);
+  if (message.sticker) {
+    console.log('S: ', message.sticker.file_id);
+  }
   if (message.date * 1000 < freshDate) return false;
   actions.forEach((action) => {
     if (action.test(message)) {

@@ -1,3 +1,4 @@
+import sample from 'lodash/sample';
 import Action from './Action';
 
 export default class AzazaAction extends Action {
@@ -6,6 +7,7 @@ export default class AzazaAction extends Action {
     'очень весело',
     ')))))))))))))))))))))))))))))))))))))))))))))))',
     'ахаха ахаха ахаха',
+    '😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂',
     'азаза просто',
     ':DDDDDDDDDDDDDDDDDDDDDDDDDDD',
     'x-DDDDDDDDDDDDDDDDDDDDDDDDDDD',
@@ -16,7 +18,6 @@ export default class AzazaAction extends Action {
   }
 
   doAction(message) {
-    const chatId = message.chat.id || message.from.id;
-    this.bot.sendMessage(chatId, this.messages[this.randomInteger(0, this.messages.length - 1)]);
+    this.sendMessage(message, sample(this.messages));
   }
 }

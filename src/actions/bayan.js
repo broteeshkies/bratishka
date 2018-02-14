@@ -1,4 +1,5 @@
 import Action from './Action';
+import sample from 'lodash/sample';
 
 export default class BayanAction extends Action {
 
@@ -18,11 +19,12 @@ export default class BayanAction extends Action {
   ]
 
   test(message) {
-    if (message.photo && this.sendLimiter(1, 10)) return true;
+    if (message.photo && this.percentProbability(5)) return true;
     return false;
   }
 
   doAction(message) {
-    this.sendMessage(message, this.messages[this.randomInteger(0, this.messages.length - 1)]);
+    this.sendMessage(message, sample(this.messages));
+    this.sendSticker(message, 'CAADAgADcAUAAhC6EgABord0yKqaTVUC');
   }
 }

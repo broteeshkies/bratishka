@@ -1,3 +1,4 @@
+import random from 'lodash/random';
 export default class Action {
   constructor(bot) {
     this.bot = bot;
@@ -6,7 +7,7 @@ export default class Action {
   testMessageRegExp(message, regExp) {
     if (!message.text) return false;
     const text = message.text.toLowerCase();
-    return text.match(regExp);
+    return text.match(regExp) != null;
   }
 
   testGroupId(message, id) {
@@ -26,32 +27,42 @@ export default class Action {
   }
 
   randomInteger(min, max) {
-    let rand = min - 0.5 + Math.random() * (max - min + 1);
-    rand = Math.round(rand);
-    return rand;
-  }
-
-  sendLimiter(min, max) {
-    let rand = min - 0.5 + Math.random() * (max - min + 1);
-    rand = Math.round(rand);
-    return rand == max;
+    return random(min, max);
   }
 
   percentProbability(percent) {
-    let rand = 0 - 0.5 + Math.random() * (100 - 0 + 1);
-    rand = Math.round(rand);
-    return rand <= percent;
+    const r = random(0, 100);
+    // console.log(r, percent, r <= percent);
+    return r <= percent;
   }
 
-  sendMessage(msg, text, delay=this.randomInteger(1,5) * 500) {
+  send(msg, text, params) {
+    let {
+      delay = random(0, 5, 1),
+      reply = 50,
+      method = 'sendMessage',
+    } = params;
     const chatId = msg.chat.id || msg.from.id;
     const bot = this.bot;
-    const opt = this.percentProbability(25) ? {
+    const opt = this.percentProbability(reply) ? {
       reply_to_message_id: msg.message_id
     } : {};
 
     setTimeout(function () {
-      bot.sendMessage(chatId, text, opt);
+      bot[method](chatId, text, opt);
     }, delay);
   }
+  sendSticker(msg, text, params = {}) {
+    this.send(msg, text, {
+      ...params,
+      method: 'sendSticker',
+    })
+  }
+  sendMessage(msg, text, params = {}) {
+    this.send(msg, text, {
+      ...params,
+      method: 'sendMessage',
+    })
+  }
+
 }

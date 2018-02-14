@@ -1,13 +1,27 @@
+import sample from 'lodash/sample';
 import Action from './Action';
 
 export default class MobxAction extends Action {
+  stickers = [
+    'CAADAQAD_gIAAnTnKwIX_7XQo_4iNAI',
+    'CAADAQADGgMAAnTnKwLmqhhn5jh30QI',
+    'CAADAgADhQADEAcEAAFWHmZsoJ1P9AI',
+    'CAADAgADgwADEAcEAAHJD8rBoTPxnAI',
+    'CAADAQAD0gIAAnTnKwIbvHBCcCfnaAI',
+    'CAADAQADXgIAAnTnKwLZQrbwbrLO_gI',
+    'CAADAQADdAIAAnTnKwKks-io2cdZYwI',
+    'CAADAQADhwIAAnTnKwJXVA0poaqG4wI',
+    'CAADAQADVgIAAnTnKwIvX-j-bpQTmwI',
+    'CAADAgADSAMAAswJPAb82xsr_NCvTQI',
+    'CAADAgADRgMAAswJPAaflgVlsoibuAI',
+  ]
   test(message) {
-    return this.testMessageRegExp(message, /\bmobx\b/);
+    return this.testMessageRegExp(message, /\bmobx|typescript|backbone|angular|erlang\b/)  && this.percentProbability(50);
   }
 
   doAction(message) {
-    const chatId = message.chat.id || message.from.id;
-    this.bot.sendMessage(chatId,
-      'https://camo.derpicdn.net/bec40cfc22f5fa5d681dea83ade712e7fe48ad99?url=http%3A%2F%2Ffc01.deviantart.net%2Ffs71%2Fi%2F2012%2F149%2F6%2F9%2Fno__9gag__by_hujikari-d51hu4l.jpg');
+    this.sendSticker(message, sample(this.stickers), {
+      reply: 100
+    });
   }
 }
