@@ -1,5 +1,4 @@
 import Action from './Action';
-import http from 'http';
 import _ from 'lodash';
 
 export default class OkAction extends Action {

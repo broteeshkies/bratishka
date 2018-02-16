@@ -1,4 +1,4 @@
-// import 'babel-polyfill';
+import 'babel-polyfill';
 import './fix';
 import 'isomorphic-fetch';
 import path from 'path';
@@ -33,6 +33,7 @@ const actionClasses = [
   require('./actions/today').default,
   require('./actions/win').default,
   require('./actions/satan').default,
+  require('./actions/polundra').default,
 ];
 
 const bot = new TelegramBot(token, { polling: true });
@@ -52,10 +53,10 @@ bot.onText(/\/echo (.+)/, (message, match) => {
 
 // Any kind of message
 bot.on('message', (message) => {
-  // console.log('M: ', message);
-  if (message.sticker) {
-    console.log('S: ', message.sticker.file_id);
-  }
+  console.log('M: ', message);
+  // if (message.sticker) {
+  //   console.log('S: ', message.sticker.file_id);
+  // }
   if (message.date * 1000 < freshDate) return false;
   actions.forEach((action) => {
     if (action.test(message)) {
