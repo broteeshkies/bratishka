@@ -1,0 +1,78 @@
+image: docker:latest
+cache:
+  key: cache_npm
+  paths:
+    - .npm
+stages:
+  - npm_install
+  - npm_build
+  - create_image
+  - test
+  - deploy
+
+variables:
+  CONTAINER_IMAGE: ${CI_REGISTRY}/${CI_PROJECT_PATH}:${CI_COMMIT_REF_NAME}_${CI_COMMIT_SHA}
+  CONTAINER_IMAGE_TAG: ${CI_REGISTRY}/${CI_PROJECT_PATH}:${CI_COMMIT_REF_NAME}
+  CONTAINER_IMAGE_CONCAT: ${CI_PROJECT_PATH_SLUG}-${CI_COMMIT_REF_NAME}
+  APP_PATH: /project
+
+npm_install:
+  stage: npm_install
+  image: node:6.9.2
+  before_script:
+    - npm config set cache ./.npm
+  script:
+    - npm install
+  variables:
+    NODE_ENV: production
+  artifacts:
+    paths:
+     - .npm/
+     - node_modules/
+
+npm_build:
+  stage: npm_build
+  image: node:6.9.2
+  script:
+    - npm run build
+  dependencies:
+    - npm_install
+  artifacts:
+    paths:
+     - build/
+
+create_image:
+  stage: create_image
+  image: docker:latest
+  script:
+    - docker login -u gitlab-ci-token -p ${CI_BUILD_TOKEN} ${CI_REGISTRY}
+    - docker build -t ${CONTAINER_IMAGE} .
+    - docker tag ${CONTAINER_IMAGE} ${CONTAINER_IMAGE_TAG}
+    - docker push ${CONTAINER_IMAGE}
+    - docker push ${CONTAINER_IMAGE_TAG}
+  dependencies:
+    - npm_build
+
+test:
+  stage: test
+  image: docker:latest
+  script:
+    - echo "ok"
+
+depoy:
+  stage: deploy
+  script:
+    - echo "${EXPOSE_PORTTT}"
+    - echo "docker stack deploy --with-registry-auth --compose-file=docker-compose.yml ${CONTAINER_IMAGE_CONCAT}"
+    - docker stack deploy --with-registry-auth --compose-file=docker-compose.yml ${CONTAINER_IMAGE_CONCAT}
+  environment:
+    name: master
+    url: https://master.buzz.guru
+  variables:
+    STAGE: master
+    EXPOSE_PORTTT: 8015
+  only:
+    - master
+  # tags: # FOR RUNNER!
+  #   - master
+  # when: manual
