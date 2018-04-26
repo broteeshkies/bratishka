@@ -43,7 +43,7 @@ create_image:
     - docker push ${CONTAINER_IMAGE}
     - docker push ${CONTAINER_IMAGE_TAG}
   dependencies:
-    - npm_build
+    - npm
 
 test:
   stage: test
