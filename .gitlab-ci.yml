@@ -6,8 +6,7 @@ cache:
 
 
 stages:
-  - npm_install
-  - npm_build
+  - npm
   - create_image
   - test
   - deploy
