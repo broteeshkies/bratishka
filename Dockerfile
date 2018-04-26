@@ -14,6 +14,7 @@ WORKDIR /app
 
 # Bundle app source
 COPY ./build /app
+COPY ./node_modules /app/node_modules
 # COPY . /app
 
 EXPOSE 8080
