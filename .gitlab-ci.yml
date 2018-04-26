@@ -3,6 +3,8 @@ cache:
   key: cache_npm
   paths:
     - .npm
+
+
 stages:
   - npm_install
   - npm_build
@@ -16,29 +18,20 @@ variables:
   CONTAINER_IMAGE_CONCAT: ${CI_PROJECT_PATH_SLUG}-${CI_COMMIT_REF_NAME}
   APP_PATH: /project
 
-npm_install:
+npm:
   stage: npm_install
   image: node:6.9.2
   before_script:
     - npm config set cache ./.npm
   script:
     - npm install
+    - npm run build
   variables:
     NODE_ENV: production
   artifacts:
     paths:
-     - .npm/
-     - node_modules/
-
-npm_build:
-  stage: npm_build
-  image: node:6.9.2
-  script:
-    - npm run build
-  dependencies:
-    - npm_install
-  artifacts:
-    paths:
+     # - .npm/
+     # - node_modules/
      - build/
 
 create_image:
