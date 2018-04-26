@@ -34,7 +34,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "build": "rm -rf build && mkdir build && cp {package.json,yarn.lock,README.md} build/ && babel src --out-dir build --source-maps inline --copy-files",
+    "build": "rm -rf build && mkdir build && cp package.json build/ && cp yarn.lock build/ && cp README.md build/ && babel src --out-dir build --source-maps inline --copy-files",
     "dev": "babel-node src/index.js",
     "dev-build": "DEBUG=1 npm run build -- --watch"
   }
