@@ -18,7 +18,7 @@ variables:
   APP_PATH: /project
 
 npm:
-  stage: npm_install
+  stage: npm
   image: node:6.9.2
   before_script:
     - npm config set cache ./.npm
