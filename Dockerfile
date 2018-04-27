@@ -8,13 +8,13 @@ WORKDIR /app
 # where available (npm@5+)
 # COPY package*.json ./
 
-# RUN npm install
 # If you are building your code for production
 # RUN npm install --only=production
 
 # Bundle app source
 COPY ./build /app
-COPY ./node_modules /app/node_modules
+RUN npm install
+# COPY ./node_modules /app/node_modules
 # COPY . /app
 
 EXPOSE 8080
