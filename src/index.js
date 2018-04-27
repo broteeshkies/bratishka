@@ -6,9 +6,12 @@ import fs from 'fs';
 // import Promise from 'bluebird';
 import TelegramBot from 'node-telegram-bot-api';
 import dotenv from 'dotenv';
+
+console.log('!@!@#!@#BOT START');
+
 dotenv.config({ silent: true });
 const token = process.env.TOKEN;
-
+console.log({ token });
 // Promise.config = () => {}; // херов багфикс для телеграма
 // let TelegramBot;
 // try {
