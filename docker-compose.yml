@@ -12,3 +12,5 @@ services:
       #     memory: 50M
     ports:
       - "${EXPOSE_PORTTT}:8080"
+    environment:
+      TOKEN: ${TOKEN}
