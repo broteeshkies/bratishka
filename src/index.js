@@ -7,11 +7,14 @@ import fs from 'fs';
 import TelegramBot from 'node-telegram-bot-api';
 import dotenv from 'dotenv';
 
-console.log('!@!@#!@#BOT START');
+console.log('#BOT START', );
+console.log('process.env.TOKEN', process.env.TOKEN);
+console.log('process.env.TASK_SLOT', process.env.TASK_SLOT);
+console.log('process.env.SERVICE_NAME', process.env.SERVICE_NAME);
 
 dotenv.config({ silent: true });
 const token = process.env.TOKEN;
-console.log({ token });
+// console.log({ token });
 // Promise.config = () => {}; // херов багфикс для телеграма
 // let TelegramBot;
 // try {
