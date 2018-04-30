@@ -12,5 +12,5 @@ services:
       #     memory: 50M
     environment:
       TOKEN: ${TOKEN}
-      SERVICE_NAME: {{.Service.Name}}
-      TASK_SLOT: {{.Task.Slot}}
+      SERVICE_NAME: "{{.Service.Name}}"
+      TASK_SLOT: "{{.Task.Slot}}"
