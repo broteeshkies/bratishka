@@ -72,4 +72,12 @@ bot.on('message', (message) => {
 
   return false;
 });
+
+bot.on('polling_error', err => {
+  const error = err.code;
+  const code = err.response.body.error_code;
+  if (error === 'ETELEGRAM' && code === 409) return;
+  console.log('ERROR', error, code);
+});
+
 console.log('Bot successful runned');
