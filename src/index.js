@@ -60,6 +60,8 @@ bot.onText(/\/echo (.+)/, (message, match) => {
 // Any kind of message
 bot.on('message', (message) => {
   console.log('M: ', message);
+  //
+
   // if (message.sticker) {
   //   console.log('S: ', message.sticker.file_id);
   // }
@@ -72,12 +74,17 @@ bot.on('message', (message) => {
 
   return false;
 });
+//
+// bot.sendPhoto(80081115, 'AgADAgADhagxG-r-aUskTzaqcl_fFvMYrQ4ABIYQ7lB4_8D_XU4BAAEC', {
+//   caption: 'message.caption',
+// });
 
-bot.on('polling_error', err => {
-  const error = err.code;
-  const code = err.response.body.error_code;
-  if (error === 'ETELEGRAM' && code === 409) return;
-  console.log('ERROR', error, code);
-});
+// bot.on('polling_error', err => {
+//  console.log('ERROR', err);
+//   const error = err.code;
+//   const code = err.response && err.response.body && err.response.body.error_code;
+//   if (error === 'ETELEGRAM' && code === 409) return;
+//   console.log('ERROR', error, code);
+// });
 
 console.log('Bot successful runned');
