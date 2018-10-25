@@ -4,6 +4,8 @@ services:
     image: "${CONTAINER_IMAGE}"
     deploy:
       replicas: 1
+      placement:
+        constraints: [node.labels.type==public]
       restart_policy:
         condition: on-failure
       # resources:
