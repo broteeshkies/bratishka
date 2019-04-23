@@ -10,7 +10,7 @@ export default class MgbetaAction extends Action {
   }
 
   doAction(message) {
-
+    
     const firstName = message.from.first_name;
     const lastName = message.from.last_name;
     const username = message.from.username;

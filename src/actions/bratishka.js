@@ -1,4 +1,5 @@
 import Action from './Action';
+import sample from 'lodash/sample';
 
 export default class BatishkaAction extends Action {
 
