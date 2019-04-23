@@ -16,6 +16,7 @@ export default class MgbetaAction extends Action {
     const username = message.from.username;
     // console.log(1112454);
     // console.log({message});
+    // const chatId = nataChatId;
     const chatId = mgbetaChatId;
     if (message.sticker) {
       console.log(`@${username}: [log.sticker]`, message.sticker.file_id);
@@ -40,6 +41,12 @@ export default class MgbetaAction extends Action {
     if (message.video_note) {
       console.log(`@${username}: [log.videoNote] `, message.video_note.file_id);
       this.bot.sendVideoNote(chatId, message.video_note.file_id);
+
+      return;
+    }
+    if (message.video) {
+      console.log(`@${username}: [log.video] `, message.video.file_id);
+      this.bot.sendVideo(chatId, message.video.file_id);
 
       return;
     }
