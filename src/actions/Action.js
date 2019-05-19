@@ -33,7 +33,7 @@ export default class Action {
   percentProbability(percent) {
     const r = random(0, 100);
     // console.log(r, percent, r <= percent);
-    return r <= percent;
+    return r < percent;
   }
 
   send(msg, text, params) {
@@ -63,6 +63,14 @@ export default class Action {
       ...params,
       method: 'sendMessage',
     })
+  }
+
+  editMessage(msg, text, params = {}) {
+    msg.then((sended) => {
+      const chatId = sended.chat.id;
+      const messageId = sended.message_id;
+      this.bot.editMessageText(text, { chat_id: chatId, message_id: messageId });
+    });
   }
 
 }
