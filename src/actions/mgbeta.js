@@ -86,7 +86,7 @@ export default class MgbetaAction extends Action {
         `ну вы и так поняли, что это @${username}`,
         `по всем вопросам к @${username}`
       ]);
-      if (['isuvorov', 'natavts', 'anoru', 'immuzov'].includes(username)) return;
+      if (['natavts', 'anoru', 'immuzov'].includes(username)) return;
       if (this.percentProbability(5)) {
         sended.then((msg) => {
           this.bot.sendMessage(chatId, deanonText, {
