@@ -158,6 +158,8 @@ export default class MgbetaAction extends Action {
             reply_to_message_id: msg.message_id
           });
         });
+        deanonUsersLives[username] = null;
+        deanonRatioStep[username] = 0;
       }
     }
   }
