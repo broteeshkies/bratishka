@@ -8,6 +8,7 @@ export default class OkAction extends Action {
   }
 
   async doAction(message) {
+    try {
     const bot = this;
     const firstWord = _.shuffle(message.text.split(' '))[0].match(/[a-zA-Zа-яА-ЯёЁ]+/)[0];
     // console.log(firstWord);
@@ -26,5 +27,7 @@ export default class OkAction extends Action {
         this.sendMessage(message, story);
           // console.log(stories);
       });
+    } catch (err) {
+    }
   }
 }

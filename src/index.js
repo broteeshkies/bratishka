@@ -59,7 +59,7 @@ bot.onText(/\/echo (.+)/, (message, match) => {
 
 // Any kind of message
 bot.on('message', (message) => {
-  console.log('M: ', message);
+  // console.log('M: ', message);
   //
 
   // if (message.sticker) {
