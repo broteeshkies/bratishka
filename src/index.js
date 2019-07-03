@@ -38,7 +38,8 @@ const actionClasses = [
   require('./actions/boobs').default,
   require('./actions/today').default,
   require('./actions/win').default,
-  require('./actions/satan').default,
+  // Сколько это можно терпеть?!
+  // require('./actions/satan').default,
   require('./actions/polundra').default,
 ];
 
