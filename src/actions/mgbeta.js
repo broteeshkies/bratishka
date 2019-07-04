@@ -149,7 +149,7 @@ export default class MgbetaAction extends Action {
       console.log(`${username} (${deanonRatioSteps[deanonRatioStep[username]]}%, lives: ${deanonUsersLives[username]}):\t${this.percentProbability(deanonRatioSteps[deanonRatioStep[username]]) ? '-1 lives (or deanon)' : 'keep calm'}` );
 
       if (textHasCurseWords || this.percentProbability(deanonRatioSteps[deanonRatioStep[username]])) {
-        if (deanonUsersLives[username] > 0) {
+        if (!textHasCurseWords && deanonUsersLives[username] > 0) {
           deanonUsersLives[username] = deanonUsersLives[username] - 1;
           sended.then((msg) => {
             this.bot.sendMessage(chatId, sample(deanonNoticeMessages), {
