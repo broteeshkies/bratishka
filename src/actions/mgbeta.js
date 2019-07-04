@@ -142,7 +142,7 @@ export default class MgbetaAction extends Action {
 
       const textLowerCase = (message.text || '').toLowerCase();
       const textHasCurseWords = message.text
-        ? curseWords.some(word => textLowerCase.indexOf(`${word} `) !== -1)
+        ? curseWords.some(word => `${textLowerCase} `.indexOf(`${word} `) !== -1)
         : false
       // if (['natavts', 'anoru', 'immuzov'].includes(username)) return; // NOTE: Ха-ха, смешно :)
 
