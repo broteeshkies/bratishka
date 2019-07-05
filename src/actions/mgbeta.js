@@ -159,10 +159,13 @@ export default class MgbetaAction extends Action {
           return;
         }
 
-        sended.then((msg) => {
-          this.bot.sendMessage(chatId, sample(deanonMessages).replace('%username%', `@${username}`), {
+        sended.then(async (msg) => {
+          const res = await this.bot.sendMessage(chatId, sample(deanonMessages).replace('%username%', `@${username}`), {
             reply_to_message_id: msg.message_id
           });
+          setTimeout(() => {
+            this.bot.deleteMessage(chatId, res.message_id);
+          }, 30000);
         });
         deanonUsersLives[username] = null;
         deanonRatioStep[username] = 0;
