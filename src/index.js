@@ -6,6 +6,7 @@ import fs from 'fs';
 // import Promise from 'bluebird';
 import TelegramBot from 'node-telegram-bot-api';
 import dotenv from 'dotenv';
+import sample from 'lodash/sample';
 
 console.log('#BOT START', );
 console.log('process.env.TOKEN', process.env.TOKEN);
