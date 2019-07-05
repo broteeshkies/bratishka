@@ -63,11 +63,12 @@ const loves = [
   'медвежонок',
 ]
 
-ferrets.forEach(ferret => {
-  sample(loves, love => {
+setTimeout(() => {
+  ferrets.forEach(ferret => {
+    const love = sample(loves)
     bot.sendMessage(ferret, love);
-  })
-});
+  });
+}, 1000)
 
 
 // Matches /echo [whatever]
