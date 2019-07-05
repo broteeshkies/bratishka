@@ -7,11 +7,7 @@ import fs from 'fs';
 import TelegramBot from 'node-telegram-bot-api';
 import dotenv from 'dotenv';
 import sample from 'lodash/sample';
-
-console.log('#BOT START', );
-console.log('process.env.TOKEN', process.env.TOKEN);
-console.log('process.env.TASK_SLOT', process.env.TASK_SLOT);
-console.log('process.env.SERVICE_NAME', process.env.SERVICE_NAME);
+import {ferrets} from './ferret';
 
 dotenv.config({ silent: true });
 const token = process.env.TOKEN;
@@ -40,6 +36,7 @@ const actionClasses = [
   require('./actions/today').default,
   require('./actions/win').default,
   require('./actions/gay').default,
+  require('./actions/ferret').default,
   // Сколько это можно терпеть?!
   // require('./actions/satan').default,
   require('./actions/polundra').default,
@@ -52,10 +49,7 @@ const actions = actionClasses.map((ActionClass) => {
   return new ActionClass(bot);
 });
 
-const ferrets = [
-  80081115,
-  1227280,
-];
+
 const loves = [
   'давно хотел сказать',
   'но всегда боялся',
