@@ -50,6 +50,25 @@ const actions = actionClasses.map((ActionClass) => {
   return new ActionClass(bot);
 });
 
+const ferrets = [
+  80081115,
+  1227280,
+];
+const loves = [
+  'давно хотел сказать',
+  'но всегда боялся',
+  'ты the BEST',
+  'спасибо тебе',
+  'медвежонок',
+]
+
+ferrets.forEach(ferret => {
+  sample(loves, love => {
+    bot.sendMessage(ferret, love);
+  })
+});
+
+
 // Matches /echo [whatever]
 bot.onText(/\/echo (.+)/, (message, match) => {
   const fromId = message.from.id;
