@@ -7,7 +7,7 @@ const mgbetaChatId = -1001042071273;
 // const mgbetaChatId = nataChatId;
 
 const deanonRatioStep = {};
-const deanonLivesLimit = 3;
+const deanonLivesLimit = 1;
 const deanonUsersLives = {};
 
 const deanonNoticeMessages = [
@@ -31,15 +31,6 @@ const curseWords = '6ля,6лядь,6лять,b3ъeб,cock,cunt,e6aль,ebal,ebl
   .split(',');
 
 const deanonRatioSteps = [
-  0.380,
-  0.780,
-  1.474,
-  2.512,
-  3.222,
-  5.570,
-  8.474,
-  11.894,
-  13.683,
   15.798,
   18.211,
   20.154,
