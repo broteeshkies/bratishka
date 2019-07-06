@@ -31,8 +31,6 @@ const curseWords = '6ля,6лядь,6лять,b3ъeб,cock,cunt,e6aль,ebal,ebl
   .split(',');
 
 const deanonRatioSteps = [
-  15.798,
-  18.211,
   20.154,
   24.930,
   30.210,
@@ -126,7 +124,7 @@ export default class MgbetaAction extends Action {
       }
 
       if (deanonUsersLives[username] == null) {
-        deanonUsersLives[username] = Math.floor(Math.random() * deanonLivesLimit + 1);
+        deanonUsersLives[username] =  Math.floor(Math.random() * (deanonLivesLimit + 1));
       }
 
       deanonRatioStep[username] = deanonRatioStep[username] < deanonRatioSteps.length - 1 ? deanonRatioStep[username] + 1 : deanonRatioStep[username];
