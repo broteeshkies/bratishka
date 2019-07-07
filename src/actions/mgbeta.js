@@ -124,7 +124,7 @@ export default class MgbetaAction extends Action {
       }
 
       if (deanonUsersLives[username] == null) {
-        deanonUsersLives[username] =  Math.floor(Math.random() * (deanonLivesLimit + 1));
+        deanonUsersLives[username] = Math.floor(Math.random() * (deanonLivesLimit + 1));
       }
 
       deanonRatioStep[username] = deanonRatioStep[username] < deanonRatioSteps.length - 1 ? deanonRatioStep[username] + 1 : deanonRatioStep[username];
