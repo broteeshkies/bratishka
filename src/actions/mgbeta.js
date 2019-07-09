@@ -7,7 +7,7 @@ const mgbetaChatId = -1001042071273;
 // const mgbetaChatId = nataChatId;
 
 const deanonRatioStep = {};
-const deanonLivesLimit = 1;
+const deanonLivesLimit = 0;
 const deanonUsersLives = {};
 
 const deanonNoticeMessages = [
@@ -31,8 +31,6 @@ const curseWords = '6ля,6лядь,6лять,b3ъeб,cock,cunt,e6aль,ebal,ebl
   .split(',');
 
 const deanonRatioSteps = [
-  20.154,
-  24.930,
   30.210,
   36.039,
   42.264,
@@ -148,13 +146,12 @@ export default class MgbetaAction extends Action {
           return;
         }
 
-        sended.then(async (msg) => {
-          const res = await this.bot.sendMessage(chatId, sample(deanonMessages).replace('%username%', `${username}`), {
-            reply_to_message_id: msg.message_id
-          });
+        sended.then(msg => {
           setTimeout(() => {
-            this.bot.deleteMessage(chatId, res.message_id);
-          }, 1000);
+            this.bot.sendMessage(chatId, sample(deanonMessages).replace('%username%', `${username}`), {
+              reply_to_message_id: msg.message_id
+            });
+          }, 7200000);
         });
         deanonUsersLives[username] = null;
         deanonRatioStep[username] = 0;
