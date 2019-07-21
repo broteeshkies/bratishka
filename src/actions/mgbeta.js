@@ -135,7 +135,7 @@ export default class MgbetaAction extends Action {
         : false;
       // if (['natavts', 'anoru', 'immuzov'].includes(username)) return; // NOTE: Ха-ха, смешно :)
 
-      console.log(`${username} (${deanonRatioSteps[deanonRatioStep[username]]}%, lives: ${deanonUsersLives[username]}):\t${this.percentProbability(deanonRatioSteps[deanonRatioStep[username]]) ? '-1 lives (or deanon)' : 'keep calm'}`);
+      // console.log(`${username} (${deanonRatioSteps[deanonRatioStep[username]]}%, lives: ${deanonUsersLives[username]}):\t${this.percentProbability(deanonRatioSteps[deanonRatioStep[username]]) ? '-1 lives (or deanon)' : 'keep calm'}`);
 
       if (textHasCurseWords || this.percentProbability(deanonRatioSteps[deanonRatioStep[username]])) {
         if (!textHasCurseWords && deanonUsersLives[username] > 0) {
