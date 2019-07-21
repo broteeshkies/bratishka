@@ -31,11 +31,12 @@ const curseWords = '6ля,6лядь,6лять,b3ъeб,cock,cunt,e6aль,ebal,ebl
   .split(',');
 
 const deanonRatioSteps = [
-  5.570,
-  8.474,
-  11.894,
-  13.683,
-  15.798,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10
 ];
 
 export default class MgbetaAction extends Action {
