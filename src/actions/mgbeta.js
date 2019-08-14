@@ -124,6 +124,7 @@ export default class MgbetaAction extends Action {
       const textHasCurseWords = message.text
         ? curseWords.some(word => textLowerCase.indexOf(word) !== -1)
         : false;
+      return; // НАХУЙ ПОШЛИ ВСЕ
       // if (['natavts', 'anoru', 'immuzov'].includes(username)) return; // NOTE: Ха-ха, смешно :)
 
       // console.log(`${username} (${deanonRatioSteps[deanonRatioStep[username]]}%, lives: ${deanonUsersLives[username]}):\t${this.percentProbability(deanonRatioSteps[deanonRatioStep[username]]) ? '-1 lives (or deanon)' : 'keep calm'}` );
