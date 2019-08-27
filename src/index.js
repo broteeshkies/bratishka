@@ -40,6 +40,7 @@ const actionClasses = [
   // Сколько это можно терпеть?!
   // require('./actions/satan').default,
   require('./actions/polundra').default,
+  require('./actions/videoNote').default,
 ];
 
 const bot = new TelegramBot(token, { polling: true });
