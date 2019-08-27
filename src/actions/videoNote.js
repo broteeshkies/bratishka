@@ -5,7 +5,7 @@ const botovodChatId = -1001138695583;
 const pornoChatId = -1001296980004;
 export default class VideoNote extends Action {
   test(message) {
-    return !!message.video_note;
+    return !!message.video_note && message.chat.id !== pornoChatId;
   }
 
   doAction(message) {
