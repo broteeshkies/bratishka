@@ -100,7 +100,7 @@ export default class MgbetaAction extends Action {
     }
     if (message.text) {
       data.method = 'sendMessage';
-      data.path = message.text;
+      data.path = (data.username == 'jomopel') ? (message.text + ' ..юю') : message.text; // заготовка для севы слева
       data.log = 'text';
     }
 
