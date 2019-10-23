@@ -5,7 +5,7 @@ const nataChatId = 80081115;
 // const immuzovChatId = -1001130687597;
 const jojoChatId = 291502721;
 //const mgbetaChatId = -1001042071273;
-const mgbetaChatId = jojoChatId;
+const mgbetaChatId = -368345831;
 
 const deanonRatioStep = {};
 const deanonLivesLimit = 0;
@@ -102,9 +102,9 @@ export default class MgbetaAction extends Action {
     if (message.text) {
       data.method = 'sendMessage';
       if (data.username == 'jomopel') {
-        if (this.testMessageRegExp(message, /..(ю|юю|.ю|.юю)/)) {         // заготовка для севы слева, 
-          data.path = message.text;                                       // пока работает, для меня. 
-        } else {                                                          // возможно стоит доработать регулярку
+        if (this.testMessageRegExp(message, /..(ю|юю|.ю|.юю)/)) {
+          data.path = message.text;
+        } else {
           data.path = message.text + '..юю';
         }
       } else {
@@ -112,6 +112,7 @@ export default class MgbetaAction extends Action {
       }
       data.log = 'text';
     }
+    // заготовка для севы слева, пока работает, для меня. возможно стоит доработать регулярку
 
     const { method, chatId, path, text = 'empty message', log, opt } = data;
 
