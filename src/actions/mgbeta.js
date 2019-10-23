@@ -3,8 +3,9 @@ import get from 'lodash/get';
 import sample from 'lodash/sample';
 const nataChatId = 80081115;
 // const immuzovChatId = -1001130687597;
-const mgbetaChatId = -1001042071273;
-// const mgbetaChatId = nataChatId;
+const jojoChatId = 291502721;
+//const mgbetaChatId = -1001042071273;
+const mgbetaChatId = jojoChatId;
 
 const deanonRatioStep = {};
 const deanonLivesLimit = 0;
@@ -100,7 +101,15 @@ export default class MgbetaAction extends Action {
     }
     if (message.text) {
       data.method = 'sendMessage';
-      data.path = (data.username == 'jomopel') ? (message.text + ' ..юю') : message.text; // заготовка для севы слева
+      if (data.username == 'jomopel') {
+        if (this.testMessageRegExp(message, /..(ю|юю|.ю|.юю)/)) {         // заготовка для севы слева, 
+          data.path = message.text;                                       // пока работает, для меня. 
+        } else {                                                          // возможно стоит доработать регулярку
+          data.path = message.text + '..юю';
+        }
+      } else {
+        data.path = message.text;
+      }
       data.log = 'text';
     }
 
