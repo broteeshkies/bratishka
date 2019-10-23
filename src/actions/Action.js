@@ -73,4 +73,8 @@ export default class Action {
     });
   }
 
+  deleteMessage(chat_id, message_id, params = {}) {
+    this.bot.deleteMessage(chat_id, message_id, params);
+  }
+
 }
