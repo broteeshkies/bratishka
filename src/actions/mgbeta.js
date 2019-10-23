@@ -112,6 +112,12 @@ export default class MgbetaAction extends Action {
       }
       data.log = 'text';
     }
+    if (message.audio) {
+      console.log(message);
+      data.method = 'sendAudio';
+      data.path = message.audio.file_id;
+      data.log = 'audio';
+    }
     // заготовка для севы слева, пока работает, для меня. возможно стоит доработать регулярку
 
     const { method, chatId, path, text = 'empty message', log, opt } = data;
