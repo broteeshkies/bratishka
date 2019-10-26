@@ -4,8 +4,9 @@ import sample from 'lodash/sample';
 const nataChatId = 80081115;
 // const immuzovChatId = -1001130687597;
 const jojoChatId = 291502721;
-//const mgbetaChatId = -1001042071273;
-const mgbetaChatId = -368345831;
+const jojoGroupId = -368345831;
+const mgbetaChatId = -1001042071273;
+// const mgbetaChatId = jojoGroupId;
 
 const deanonRatioStep = {};
 const deanonLivesLimit = 0;
@@ -101,19 +102,18 @@ export default class MgbetaAction extends Action {
     }
     if (message.text) {
       data.method = 'sendMessage';
-      if (data.username == 'jomopel') {
-        if (this.testMessageRegExp(message, /..(ю|юю|.ю|.юю)/)) {
-          data.path = message.text;
-        } else {
-          data.path = message.text + '..юю';
-        }
-      } else {
+      // if (data.username == 'jomopel') {
+      //   if (this.testMessageRegExp(message, /..(ю|юю|.ю|.юю)/)) {
+      //     data.path = message.text;
+      //   } else {
+      //     data.path = message.text + '..юю';
+      //   }
+      // } else {
         data.path = message.text;
-      }
+      // }
       data.log = 'text';
     }
     if (message.audio) {
-      console.log(message);
       data.method = 'sendAudio';
       data.path = message.audio.file_id;
       data.log = 'audio';
