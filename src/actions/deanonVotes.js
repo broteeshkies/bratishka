@@ -16,11 +16,7 @@ const deanonMessages = [
 
 export default class deanonVotes extends Action {
   test(message) {
-
-    if (message.chat.id < 0 && this.testMessageRegExp(message, /deanon/)) {
-      return true;
-    }
-    return false;
+    return message.chat.id === mgbetaChatId && this.testMessageRegExp(message, /deanon/);
   }
 
   doAction(message) {
@@ -33,8 +29,8 @@ export default class deanonVotes extends Action {
       if (anons.count.includes(userPoll)) return;
       anons.count.push(userPoll);
       if (anons.count.length >= REPLY_COUNT) {
-        const { user } = anons;
-        this.bot.sendMessage(mgbetaChatId, sample(deanonMessages).replace('%username%', `${user}`), {
+        const { username } = anons;
+        this.bot.sendMessage(mgbetaChatId, sample(deanonMessages).replace('%username%', `${username}`), {
           reply_to_message_id: keyMsgId,
         });
         delete anonMessages[message.message_id];

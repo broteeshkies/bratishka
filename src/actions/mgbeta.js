@@ -15,7 +15,7 @@ const deanonUsersLives = {};
 //deanon settings
 export const anonMessages = {};
 export const REPLY_COUNT = 7; // количество голосов для деанона
-const pollTime = 420000; // продоложительность опроса в мс.
+const pollTime = 1000 * 60 * 7; // продоложительность опроса в мс.
 
 const deanonNoticeMessages = [
   'осторожнее, молодой человек, там можно и на деанон нарваться ;)',
@@ -127,10 +127,10 @@ export default class MgbetaAction extends Action {
 
 
     if (data.method) {
-      const sender = message.chat.username;
+      const { username } = message.chat;
       const sended = this.bot[method](chatId, path, opt);
       sended.then(message => {
-        anonMessages[message.message_id] = { message, count: [], user: sender };
+        anonMessages[message.message_id] = { message, count: [], username };
 
         //console.log("TCL: deanonVotes -> doAction -> anonMessages", anonMessages)
         // больше не отслеживаем по таймауту
