@@ -7,8 +7,9 @@ import fs from 'fs';
 import TelegramBot from 'node-telegram-bot-api';
 import dotenv from 'dotenv';
 import sample from 'lodash/sample';
-import {ferrets} from './ferret';
+import { ferrets } from './ferret';
 
+// export const anonMessages = {};
 dotenv.config({ silent: true });
 const token = process.env.TOKEN;
 // console.log({ token });
@@ -41,6 +42,7 @@ const actionClasses = [
   // require('./actions/satan').default,
   require('./actions/polundra').default,
   require('./actions/videoNote').default,
+  require('./actions/deanonVotes').default,
 ];
 
 const bot = new TelegramBot(token, { polling: true });
@@ -94,7 +96,7 @@ bot.onText(/\/echo (.+)/, (message, match) => {
 
 // Any kind of message
 bot.on('message', (message) => {
-  // console.log('M: ', message);
+  //console.log('M: ', message);
   //
 
   // if (message.sticker) {

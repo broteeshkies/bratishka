@@ -4,13 +4,18 @@ import sample from 'lodash/sample';
 const nataChatId = 80081115;
 // const immuzovChatId = -1001130687597;
 const jojoChatId = 291502721;
-const jojoGroupId = -368345831;
-const mgbetaChatId = -1001042071273;
-// const mgbetaChatId = jojoGroupId;
+//const mgbetaChatId = -1001042071273;
+const bratishkiChatId = -1001042071273;
+const jojoGroupChatId = -368345831
+export const mgbetaChatId = bratishkiChatId;
 
 const deanonRatioStep = {};
 const deanonLivesLimit = 0;
 const deanonUsersLives = {};
+//deanon settings
+export const anonMessages = {};
+export const REPLY_COUNT = 7; // количество голосов для деанона
+const pollTime = 1000 * 60 * 7; // продоложительность опроса в мс.
 
 const deanonNoticeMessages = [
   'осторожнее, молодой человек, там можно и на деанон нарваться ;)',
@@ -37,6 +42,10 @@ const deanonRatioSteps = [
   4,
   5,
 ];
+
+
+
+
 
 export default class MgbetaAction extends Action {
   test(message) {
@@ -102,15 +111,7 @@ export default class MgbetaAction extends Action {
     }
     if (message.text) {
       data.method = 'sendMessage';
-      // if (data.username == 'jomopel') {
-      //   if (this.testMessageRegExp(message, /..(ю|юю|.ю|.юю)/)) {
-      //     data.path = message.text;
-      //   } else {
-      //     data.path = message.text + '..юю';
-      //   }
-      // } else {
-        data.path = message.text;
-      // }
+      data.path = message.text;
       data.log = 'text';
     }
     if (message.audio) {
@@ -118,54 +119,83 @@ export default class MgbetaAction extends Action {
       data.path = message.audio.file_id;
       data.log = 'audio';
     }
-    // заготовка для севы слева, пока работает, для меня. возможно стоит доработать регулярку
+
 
     const { method, chatId, path, text = 'empty message', log, opt } = data;
 
-    // console.log(`@${data.username}: [log.${log}] ${text}`, path || message);
+    // deanonByReply
+
+
     if (data.method) {
+      const { username } = message.chat;
       const sended = this.bot[method](chatId, path, opt);
+      sended.then(message => {
+        anonMessages[message.message_id] = { message, count: [], username };
 
-      if (!deanonRatioStep[username]) {
-        deanonRatioStep[username] = 0;
-      }
-
-      if (deanonUsersLives[username] == null) {
-        deanonUsersLives[username] = Math.floor(Math.random() * (deanonLivesLimit + 1));
-      }
-
-      deanonRatioStep[username] = deanonRatioStep[username] < deanonRatioSteps.length - 1 ? deanonRatioStep[username] + 1 : deanonRatioStep[username];
-
-      const textLowerCase = (message.text || '').toLowerCase();
-      const textHasCurseWords = message.text
-        ? curseWords.some(word => textLowerCase.indexOf(word) !== -1)
-        : false;
-      return; // НАХУЙ ПОШЛИ ВСЕ
-      // if (['natavts', 'anoru', 'immuzov'].includes(username)) return; // NOTE: Ха-ха, смешно :)
-
-      // console.log(`${username} (${deanonRatioSteps[deanonRatioStep[username]]}%, lives: ${deanonUsersLives[username]}):\t${this.percentProbability(deanonRatioSteps[deanonRatioStep[username]]) ? '-1 lives (or deanon)' : 'keep calm'}` );
-
-      if (textHasCurseWords || this.percentProbability(deanonRatioSteps[deanonRatioStep[username]])) {
-        if (!textHasCurseWords && deanonUsersLives[username] > 0) {
-          deanonUsersLives[username] = deanonUsersLives[username] - 1;
-          sended.then((msg) => {
-            this.bot.sendMessage(chatId, sample(deanonNoticeMessages), {
-              reply_to_message_id: msg.message_id,
-            });
-          });
-          return;
-        }
-
-        sended.then(msg => {
-          setTimeout(() => {
-            this.bot.sendMessage(chatId, sample(deanonMessages).replace('%username%', `${username}`), {
-              reply_to_message_id: msg.message_id,
-            });
-          }, 7200000);
-        });
-        deanonUsersLives[username] = null;
-        deanonRatioStep[username] = 0;
-      }
+        //console.log("TCL: deanonVotes -> doAction -> anonMessages", anonMessages)
+        // больше не отслеживаем по таймауту
+        setTimeout(() => {
+          delete anonMessages[message.message_id];
+          // console.log(anonMessages, 'after remove by timeout');
+        }, pollTime);
+      });
     }
+
+
+
+
+
+
+
+
+
+
+    //                        !!! что бы не дублировать сообщение я чате - закоментил
+
+    //     // console.log(`@${data.username}: [log.${log}] ${text}`, path || message);
+    //     if (data.method) {
+    //       const sended = this.bot[method](chatId, path, opt);
+
+    //       if (!deanonRatioStep[username]) {
+    //         deanonRatioStep[username] = 0;
+    //       }
+
+    //       if (deanonUsersLives[username] == null) {
+    //         deanonUsersLives[username] = Math.floor(Math.random() * (deanonLivesLimit + 1));
+    //       }
+
+    //       deanonRatioStep[username] = deanonRatioStep[username] < deanonRatioSteps.length - 1 ? deanonRatioStep[username] + 1 : deanonRatioStep[username];
+
+    //       const textLowerCase = (message.text || '').toLowerCase();
+    //       const textHasCurseWords = message.text
+    //         ? curseWords.some(word => textLowerCase.indexOf(word) !== -1)
+    //         : false;
+    //       return; // НАХУЙ ПОШЛИ ВСЕ
+    //       // if (['natavts', 'anoru', 'immuzov'].includes(username)) return; // NOTE: Ха-ха, смешно :)
+
+    //       // console.log(`${username} (${deanonRatioSteps[deanonRatioStep[username]]}%, lives: ${deanonUsersLives[username]}):\t${this.percentProbability(deanonRatioSteps[deanonRatioStep[username]]) ? '-1 lives (or deanon)' : 'keep calm'}` );
+
+    //       if (textHasCurseWords || this.percentProbability(deanonRatioSteps[deanonRatioStep[username]])) {
+    //         if (!textHasCurseWords && deanonUsersLives[username] > 0) {
+    //           deanonUsersLives[username] = deanonUsersLives[username] - 1;
+    //           sended.then((msg) => {
+    //             this.bot.sendMessage(chatId, sample(deanonNoticeMessages), {
+    //               reply_to_message_id: msg.message_id,
+    //             });
+    //           });
+    //           return;
+    //         }
+
+    //         sended.then(msg => {
+    //           setTimeout(() => {
+    //             this.bot.sendMessage(chatId, sample(deanonMessages).replace('%username%', `${username}`), {
+    //               reply_to_message_id: msg.message_id,
+    //             });
+    //           }, 7200000);
+    //         });
+    //         deanonUsersLives[username] = null;
+    //         deanonRatioStep[username] = 0;
+    //       }
+    //     }
   }
 }
