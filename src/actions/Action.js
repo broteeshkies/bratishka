@@ -64,6 +64,14 @@ export default class Action {
       method: 'sendMessage',
     })
   }
+  sendPhoto(msg, text, params = {}) {
+    console.log('sendPhoto', msg);
+    
+    this.send(msg, text, {
+      ...params,
+      method: 'sendPhoto',
+    })
+  }
 
   editMessage(msg, text, params = {}) {
     msg.then((sended) => {
