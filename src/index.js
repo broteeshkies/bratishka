@@ -21,7 +21,6 @@ const token = process.env.TOKEN;
 //   console.log('TelegramBot init', err);
 // }
 
-
 const actionClasses = [
   require('./actions/antons').default,
   require('./actions/odnoklassniki').default,
@@ -43,6 +42,7 @@ const actionClasses = [
   require('./actions/polundra').default,
   require('./actions/videoNote').default,
   require('./actions/deanonVotes').default,
+  require('./actions/places').default,
 ];
 
 const bot = new TelegramBot(token, { polling: true });
@@ -51,7 +51,6 @@ const freshDate = Date.now();
 const actions = actionClasses.map((ActionClass) => {
   return new ActionClass(bot);
 });
-
 
 const loves = [
   'давно хотел сказать',
@@ -75,16 +74,15 @@ const loves = [
   'Аааа ОРУ!',
   'Меня обновили. Угадай какой компромат добавлии на тебя?',
   'скучаю по твоим сообщениям',
-  'напиши Нате плиз',
-]
+  'напиши Нате плиз'
+];
 
 setTimeout(() => {
   ferrets.forEach(ferret => {
-    const love = sample(loves)
+    const love = sample(loves);
     bot.sendMessage(ferret, love);
   });
-}, 1000)
-
+}, 1000);
 
 // Matches /echo [whatever]
 bot.onText(/\/echo (.+)/, (message, match) => {
@@ -95,7 +93,7 @@ bot.onText(/\/echo (.+)/, (message, match) => {
 });
 
 // Any kind of message
-bot.on('message', (message) => {
+bot.on('message', message => {
   //console.log('M: ', message);
   //
 
@@ -103,7 +101,7 @@ bot.on('message', (message) => {
   //   console.log('S: ', message.sticker.file_id);
   // }
   if (message.date * 1000 < freshDate) return false;
-  actions.forEach((action) => {
+  actions.forEach(action => {
     if (action.test(message)) {
       action.doAction(message);
     }
