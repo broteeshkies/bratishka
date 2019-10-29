@@ -78,7 +78,7 @@ const loves = [
 ];
 
 setTimeout(() => {
-  ferrets.forEach(ferret => {
+  ferrets.forEach((ferret) => {
     const love = sample(loves);
     bot.sendMessage(ferret, love);
   });
@@ -93,7 +93,7 @@ bot.onText(/\/echo (.+)/, (message, match) => {
 });
 
 // Any kind of message
-bot.on('message', message => {
+bot.on('message', (message) => {
   //console.log('M: ', message);
   //
 
@@ -101,7 +101,7 @@ bot.on('message', message => {
   //   console.log('S: ', message.sticker.file_id);
   // }
   if (message.date * 1000 < freshDate) return false;
-  actions.forEach(action => {
+  actions.forEach((action) => {
     if (action.test(message)) {
       action.doAction(message);
     }
