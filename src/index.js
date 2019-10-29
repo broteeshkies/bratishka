@@ -37,6 +37,7 @@ const actionClasses = [
   require('./actions/today').default,
   require('./actions/win').default,
   require('./actions/gay').default,
+  require('./actions/cats').default,
   require('./actions/ferret').default,
   // Сколько это можно терпеть?!
   // require('./actions/satan').default,

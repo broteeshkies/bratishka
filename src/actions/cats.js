@@ -17,7 +17,7 @@ export default class CatsAction extends Action {
       // resp in json format
       const data = await resp.json();
       //const url = data[0].url;
-      const { url } = data[0];
+      const [{ url }] = data;
       
       this.sendPhoto(message, url);
     } catch(err) {
