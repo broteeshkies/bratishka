@@ -65,7 +65,7 @@ export default class Action {
     })
   }
   sendPhoto(msg, text, params = {}) {
-    console.log('sendPhoto', msg);
+    // console.log('sendPhoto', msg);
     
     this.send(msg, text, {
       ...params,
