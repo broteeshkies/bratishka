@@ -27,24 +27,81 @@ const restrictedCities = [
   'Солт Лейк Сити',
 ];
 
-const phrases = [
-  'сходить в',
-  'пойти в',
-  'нажраться в',
-  'найти в',
-  'собраться в',
+const eatPhrases = [
   'поесть в',
   'еда в',
+  'пообедать в',
+  'покушать в',
+];
+
+const drinkPhrases = [
+  'нажраться в',
   'бухать в',
   'выпить в',
 ];
 
-const section = sample(['food', 'drinks', 'coffee']);
+const coffeePhrases = [
+  'выпить кофе в',
+  'попить кофе в',
+  'напитки в',
+  'кофе в',
+  'кофейни в',
+];
+
+const shopsPhrases = [
+  'магазы в',
+  'магазины в',
+  'затариться в',
+  'товары в',
+];
+
+const artsPhrases = [
+  'насладиться в',
+  'посмотреть в',
+  'искусство в',
+];
+
+const sightsPhrases = [
+  'достопримечательности в',
+  'интересное в',
+  'интересности в',
+  'туристам в',
+];
+
+const outdoorsPhrases = [
+  'сходить в',
+  'пойти в',
+  'найти в',
+  'собраться в',
+];
+
+const phrases = [
+  ...eatPhrases,
+  ...drinkPhrases,
+  ...coffeePhrases,
+  ...shopsPhrases,
+  ...artsPhrases,
+  ...sightsPhrases,
+  ...outdoorsPhrases,
+];
+
 const rx = new RegExp(`(${phrases.join('|')}) ([A-Za-zА-Яа-я0-9- ]+)`, 'i');
 
 export default class PlacesAction extends Action {
   test(message) {
     return this.testMessageRegExp(message, rx);
+  }
+
+  getSection(action) {
+    const categories = ['food', 'drinks', 'coffee', 'shops', 'sights', 'outdoors'];
+    let section = sample(categories);
+    if (eatPhrases.includes(action)) section = categories[0];
+    if (drinkPhrases.includes(action)) section = categories[1];
+    if (coffeePhrases.includes(action)) section = categories[2];
+    if (shopsPhrases.includes(action)) section = categories[3];
+    if (sightsPhrases.includes(action)) section = categories[4];
+    if (outdoorsPhrases.includes(action)) section = categories[5];
+    return section;
   }
 
   async getPhoto(v, venueId) {
@@ -77,7 +134,7 @@ export default class PlacesAction extends Action {
     }
   }
 
-  async findVenues(v, near) {
+  async findVenues(v, near, section) {
     if (!FSQR_CLIENT_ID && !FSQR_CLIENT_SECRET) {
       return {
         caption: ERR_MSG,
@@ -164,13 +221,14 @@ ${venue.address}` : ''}
 
   async doAction(message) {
     const { text } = message;
-    const [, , cityRaw] = rx.exec(text);
+    const [, action, cityRaw] = rx.exec(text);
     const bot = this.bot;
+    const section = this.getSection(action);
     const chatId = message.chat.id || message.from.id;
     const options = { reply_to_message_id: message.message_id };
     bot.sendMessage(chatId, 'Уже бегу искать, оставайтесь на линии!', options);
     const city = await this.prepareCityName(cityRaw);
-    const { photos, caption } = await this.findVenues('20191029', city);
+    const { photos, caption } = await this.findVenues('20191029', city, section);
     let media = [];
     if (photos && Array.isArray(photos)) {
       media = photos.map((photo, index) => ({
