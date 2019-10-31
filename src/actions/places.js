@@ -35,6 +35,8 @@ const phrases = [
   'собраться в',
   'поесть в',
   'еда в',
+  'бухать в',
+  'выпить в',
 ];
 
 const section = sample(['food', 'drinks', 'coffee']);
