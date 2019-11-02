@@ -11,15 +11,12 @@
   ],
   "main": "index.js",
   "dependencies": {
-    "@k3rn31p4nic/google-translate-api": "1.1.0",
     "babel-polyfill": "^6.26.0",
     "bluebird": "3.5.1",
     "dotenv": "2.0.0",
     "isomorphic-fetch": "2.2.1",
     "lodash": "4.17.11",
-    "node-telegram-bot-api": "0.30.0",
-    "phpmorphy": "2.0.13",
-    "query-string": "6.8.3"
+    "node-telegram-bot-api": "0.30.0"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
@@ -34,14 +31,13 @@
     "eslint-loader": "1.6.3",
     "eslint-plugin-import": "2.2.0",
     "eslint-plugin-jsx-a11y": "3.0.2",
-    "eslint-plugin-react": "6.9.0",
-    "nodemon": "1.19.4"
+    "eslint-plugin-react": "6.9.0"
   },
   "scripts": {
     "start": "node index.js",
     "build": "rm -rf build && mkdir build && cp package.json build/ && cp yarn.lock build/ && cp README.md build/ && babel src --out-dir build --source-maps inline --copy-files",
     "build2": "rm -rf build2 && mkdir build2 && cp package.json build2/ && cp yarn.lock build2/ && cp README.md build2/ && babel src --out-dir build2 --source-maps inline --copy-files",
-    "dev": "nodemon --watch src --exec babel-node src/index.js",
+    "dev": "babel-node src/index.js",
     "dev-build": "DEBUG=1 npm run build -- --watch"
   }
 }

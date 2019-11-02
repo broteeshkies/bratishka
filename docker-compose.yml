@@ -13,8 +13,6 @@ services:
       #     cpus: "0.1"
       #     memory: 50M
     environment:
-      FSQR_CLIENT_ID: ${FSQR_CLIENT_ID}
-      FSQR_CLIENT_SECRET: ${FSQR_CLIENT_SECRET}
       TOKEN: ${TOKEN}
       SERVICE_NAME: "{{.Service.Name}}"
       TASK_SLOT: "{{.Task.Slot}}"

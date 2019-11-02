@@ -21,6 +21,7 @@ const token = process.env.TOKEN;
 //   console.log('TelegramBot init', err);
 // }
 
+
 const actionClasses = [
   require('./actions/antons').default,
   require('./actions/odnoklassniki').default,
@@ -43,7 +44,6 @@ const actionClasses = [
   require('./actions/polundra').default,
   require('./actions/videoNote').default,
   require('./actions/deanonVotes').default,
-  require('./actions/places').default,
 ];
 
 const bot = new TelegramBot(token, { polling: true });
@@ -52,6 +52,7 @@ const freshDate = Date.now();
 const actions = actionClasses.map((ActionClass) => {
   return new ActionClass(bot);
 });
+
 
 const loves = [
   'давно хотел сказать',
@@ -75,15 +76,16 @@ const loves = [
   'Аааа ОРУ!',
   'Меня обновили. Угадай какой компромат добавлии на тебя?',
   'скучаю по твоим сообщениям',
-  'напиши Нате плиз'
-];
+  'напиши Нате плиз',
+]
 
 setTimeout(() => {
-  ferrets.forEach((ferret) => {
-    const love = sample(loves);
+  ferrets.forEach(ferret => {
+    const love = sample(loves)
     bot.sendMessage(ferret, love);
   });
-}, 1000);
+}, 1000)
+
 
 // Matches /echo [whatever]
 bot.onText(/\/echo (.+)/, (message, match) => {
