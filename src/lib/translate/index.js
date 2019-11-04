@@ -99,10 +99,9 @@ const translate = async(text, options) => {
       },
       raw: ''
     };
-
     // If user requested a raw output, add the raw response to the result
     if (options.raw) {
-      result.raw = response;
+      result.raw = JSON.stringify(response);
     }
 
     // Parse string body to JSON and add it to result object.

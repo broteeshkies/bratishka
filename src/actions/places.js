@@ -27,6 +27,10 @@ const restrictedCities = [
   'Солт Лейк Сити',
 ];
 
+const restrictedTranslates = [
+  'СЫСЕРТЬ',
+];
+
 const eatPhrases = [
   'поесть в',
   'еда в',
@@ -140,6 +144,7 @@ export default class PlacesAction extends Action {
         caption: ERR_MSG,
       };
     }
+
     try {
       const res = await fetch(
         `${HOST}/venues/explore?${qs.stringify({
@@ -171,8 +176,13 @@ export default class PlacesAction extends Action {
       const cityAddress = get(res, 'response.geocode.displayString');
       if (!cityAddress) {
         return {
-          caption: 'Извини, я не нашел ничего в этом городе.',
-        }
+          caption: 'Извини, я не нашел этого города.',
+        };
+      }
+      if (!(Array.isArray(venues) && venues.length)) {
+        return {
+          caption: 'Извини, я не нашел ничего в этом городе, возможно заведения уже закрыты. Попробуй в другой раз.',
+        };
       }
       const caption = `
 В <b>${cityAddress}</b>, есть несколько мест, которые сейчас открыты:
@@ -215,6 +225,9 @@ ${venue.address}` : ''}
     let newCity;
     if (isError) newCity = name;
     else newCity = compCity.join(' ');
+    if (restrictedTranslates.includes(newCity)) {
+      return restrictedTranslates.find(e => e === newCity);
+    }
     const { text }  = await translate(newCity, { to: 'en' });
     return text;
   }
@@ -228,6 +241,7 @@ ${venue.address}` : ''}
     const options = { reply_to_message_id: message.message_id };
     bot.sendMessage(chatId, 'Уже бегу искать, оставайтесь на линии!', options);
     const city = await this.prepareCityName(cityRaw);
+    // console.log(city);
     const { photos, caption } = await this.findVenues('20191029', city, section);
     let media = [];
     if (photos && Array.isArray(photos)) {
