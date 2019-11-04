@@ -41,6 +41,7 @@ const actionClasses = [
   require('./actions/ferret').default,
   // Сколько это можно терпеть?!
   // require('./actions/satan').default,
+  require('./actions/places').default,
   require('./actions/polundra').default,
   require('./actions/videoNote').default,
   require('./actions/deanonVotes').default,
