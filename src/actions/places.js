@@ -1,10 +1,10 @@
-import qs from 'query-string';
+import qs from 'querystring';
 import Morphy from 'phpmorphy';
-import translate from '@k3rn31p4nic/google-translate-api';
 import get from 'lodash/get';
 import sample from 'lodash/sample';
 import lowerCase from 'lodash/lowerCase';
 import upperCase from 'lodash/upperCase';
+import translate from '../lib/translate';
 import Action from './Action';
 
 const { FSQR_CLIENT_ID, FSQR_CLIENT_SECRET } = process.env;
