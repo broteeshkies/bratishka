@@ -11,11 +11,41 @@ const { FSQR_CLIENT_ID, FSQR_CLIENT_SECRET } = process.env;
 const HOST = 'https://api.foursquare.com/v2';
 const ERR_MSG = 'Извини, я забыл как искать. Возможно когда-нибудь вспомню.';
 
+const startSearchPhrases = [
+  'Ушёл искать.',
+  'Уже бегу искать, оставайтесь на линии!',
+  'Ща поищем, братиш.',
+  'Опять искать? Ладно..',
+  'OK Boomer',
+];
+
+const endSearchNotFoundPhrases = [
+  'Извини, я не нашел этого города.',
+  'Ну я хотябы пытался найти.',
+  'Слыш, пёс. А ты уверен в этом месте?',
+  'В общем, ничего не найдено. Я пошёл...',
+  '404 Not found',
+];
+
+const endSearchTimedPhrases = [
+  'Извини, я не нашел ничего в этом городе, возможно заведения уже закрыты. Попробуй в другой раз.',
+  'Мне пришлось все заведения обзвонить, но никто не ответил. Всё ты виноват, смотри который час.',
+  'Я хз, мне сказали сказать, что всё закрыто.',
+  'Давай не сейчас, уже не время.',
+];
+
+const foundPlaces = (address) => ([
+  `В <b>${address}</b>, есть несколько мест, которые сейчас открыты:`,
+  `Ну, в общем, здесь (<b>${address}</b>) кое-что ещё открыто:`,
+  `Результаты лучше чем на алиэкспрессе. Смотри, что нашёл в <b>${address}</b>:`,
+  `Это было сложно, но всё для тебя! Здесь, <b>${address}</b>, есть следующие места:`,
+]);
+
 const userCitiesEnum = {
-  'имасе': 'Лимассол',
-  'имас': 'Лимассол',
-  'ижний': 'Нижний Новгород',
-  'ижнем': 'Нижний Новгород',
+  'лимасе': 'Лимассол',
+  'лимас': 'Лимассол',
+  'нижний': 'Нижний Новгород',
+  'нижнем': 'Нижний Новгород',
   'нур-султане': 'Астана',
   'нур-султан': 'Астана',
   'спб': 'Санкт-Петербург',
@@ -89,7 +119,7 @@ const phrases = [
   ...outdoorsPhrases,
 ];
 
-const rx = new RegExp(`(${phrases.join('|')}) ([A-Za-zА-Яа-я0-9- ]+)`, 'i');
+const rx = new RegExp(`(${phrases.join('|')})о? ([A-Za-zА-Яа-я0-9- ]+)`, 'i');
 
 export default class PlacesAction extends Action {
   test(message) {
@@ -176,16 +206,16 @@ export default class PlacesAction extends Action {
       const cityAddress = get(res, 'response.geocode.displayString');
       if (!cityAddress) {
         return {
-          caption: 'Извини, я не нашел этого города.',
+          caption: sample(endSearchNotFoundPhrases),
         };
       }
       if (!(Array.isArray(venues) && venues.length)) {
         return {
-          caption: 'Извини, я не нашел ничего в этом городе, возможно заведения уже закрыты. Попробуй в другой раз.',
+          caption: sample(endSearchTimedPhrases)
         };
       }
       const caption = `
-В <b>${cityAddress}</b>, есть несколько мест, которые сейчас открыты:
+${sample(foundPlaces(cityAddress))}
 ${venues.map((venue, index) => `
 ${index + 1}. <i>${venue.name}</i>${!!venue.address ? `
 ${venue.address}` : ''}
@@ -239,10 +269,10 @@ ${venue.address}` : ''}
     const section = this.getSection(action);
     const chatId = message.chat.id || message.from.id;
     const options = { reply_to_message_id: message.message_id };
-    bot.sendMessage(chatId, 'Уже бегу искать, оставайтесь на линии!', options);
+    bot.sendMessage(chatId, sample(startSearchPhrases), options);
     const city = await this.prepareCityName(cityRaw);
     // console.log(city);
-    const { photos, caption } = await this.findVenues('20191029', city, section);
+    const { photos, caption } = await this.findVenues('20191127', city, section);
     let media = [];
     if (photos && Array.isArray(photos)) {
       media = photos.map((photo, index) => ({
