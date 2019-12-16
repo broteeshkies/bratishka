@@ -35,7 +35,7 @@ export default class CatsAction extends Action {
   }
 
   test(message) {
-    return this.testMessageRegExp(message, / кот || кусь /);
+    return this.testMessageRegExp(message, / котик || кусь /);
   }
 
 }
