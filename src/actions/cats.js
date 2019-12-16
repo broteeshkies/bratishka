@@ -9,6 +9,8 @@ export default class CatsAction extends Action {
     'сам ты котик пушистый',
     'кысь-кысь, котяндра',
     'кот-котэ-котик-ко_тян_дроч_ка',
+    'килограмм корма за хурму!1!!!1!!'
+    'а можно фотку киски ?'
   ]
 
   async getCat(message) {
@@ -33,7 +35,7 @@ export default class CatsAction extends Action {
   }
 
   test(message) {
-    return this.testMessageRegExp(message, /котик/);
+    return this.testMessageRegExp(message, / котик || кот || кусь /);
   }
 
 }
