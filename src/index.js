@@ -91,11 +91,10 @@ if (!__DEV__) {
       bot.sendMessage(ferret, love);
     });
     try {
-      const lastCommitMessage = fs.readFileSync(__dirname + '/../last_commit_message.txt').toString();
+      const lastCommitMessage = fs.readFileSync(__dirname + '/last_commit_message.txt').toString();
       bot.sendMessage(mgbetaChatId, lastCommitMessage);
     } catch(err){
       console.error(err);
-      
     }
   }, 1000);
 }
