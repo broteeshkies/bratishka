@@ -83,22 +83,37 @@ const loves = [
   'скучаю по твоим сообщениям',
   'напиши Нате плиз',
 ]
-
 if (!__DEV__) {
   setTimeout(() => {
     try {
       const lastCommitMessage = fs.readFileSync(__dirname + '/last_commit_message.txt').toString();
-      bot.sendMessage(mgbetaChatId, lastCommitMessage);
+      const lines = lastCommitMessage.split('\n');
+      const commitId = lines[0].split(' ')[1]
+      const commitAuthor = lines[1].split(': ')[1].split(' <')[0]
+      const commitDate = new Date(lines[2].split(': ')[1].trim());
+      const commitMessage = lines.slice(4, lines.length - 1).join('\n');
+      const commitIsNew = (new Date() - 20 * 60 * 1000 < commitDate);
+      const message = `
+#ОБНОВЛЕНИЕ от ${commitAuthor}
+
+${commitMessage}
+
+https://gitlab.isuvorov.com/mgbeta/bratishka/commit/${commitId}
+`.trim()
+    
+      if (commitIsNew) {
+        bot.sendMessage(mgbetaChatId, message);
+      }
     } catch(err){
       console.error(err);
     }
   }, 1000);
-  setTimeout(() => {
-    ferrets.forEach(ferret => {
-      const love = sample(loves)
-      bot.sendMessage(ferret, love);
-    });
-  }, 60000);
+  // setTimeout(() => {
+  //   ferrets.forEach(ferret => {
+  //     const love = sample(loves)
+  //     bot.sendMessage(ferret, love);
+  //   });
+  // }, 60000);
 }
 
 
