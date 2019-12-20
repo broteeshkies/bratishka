@@ -23,6 +23,7 @@ npm:
   before_script:
     - npm config set cache ./.npm
   script:
+    - git log -1 --format=medium --output=last_commit_message.txt
     - npm install
     - npm run build
   variables:
@@ -33,12 +34,12 @@ npm:
      # - .npm/
      # - node_modules/
      - build/
+     - last_commit_message.txt
 
 create_image:
   stage: create_image
   image: docker:latest
   script:
-    - git log -1 --format=medium --output=last_commit_message.txt
     - docker login -u gitlab-ci-token -p ${CI_BUILD_TOKEN} ${CI_REGISTRY}
     - docker build -t ${CONTAINER_IMAGE} .
     - docker tag ${CONTAINER_IMAGE} ${CONTAINER_IMAGE_TAG}

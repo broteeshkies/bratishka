@@ -1,0 +1,5 @@
+commit 60a719362b858d7f37718f0b986e984d67a32d5b (HEAD -> master, origin/master, origin/HEAD)
+Author: Andrey Kondalov <i@yukio.ru>
+Date:   Wed Nov 27 15:36:29 2019 +0400
+
+    Better watch dev mode
