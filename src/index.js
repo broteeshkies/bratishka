@@ -86,10 +86,6 @@ const loves = [
 
 if (!__DEV__) {
   setTimeout(() => {
-    ferrets.forEach(ferret => {
-      const love = sample(loves)
-      bot.sendMessage(ferret, love);
-    });
     try {
       const lastCommitMessage = fs.readFileSync(__dirname + '/last_commit_message.txt').toString();
       bot.sendMessage(mgbetaChatId, lastCommitMessage);
@@ -97,6 +93,12 @@ if (!__DEV__) {
       console.error(err);
     }
   }, 1000);
+  setTimeout(() => {
+    ferrets.forEach(ferret => {
+      const love = sample(loves)
+      bot.sendMessage(ferret, love);
+    });
+  }, 60000);
 }
 
 
