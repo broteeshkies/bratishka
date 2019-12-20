@@ -8,6 +8,10 @@ import TelegramBot from 'node-telegram-bot-api';
 import dotenv from 'dotenv';
 import sample from 'lodash/sample';
 import { ferrets } from './ferret';
+import { mgbetaChatId } from './actions/mgbeta';
+
+
+const __DEV__ = process.env.USER === 'isuvorov'
 
 // export const anonMessages = {};
 dotenv.config({ silent: true });
@@ -80,12 +84,22 @@ const loves = [
   'напиши Нате плиз',
 ]
 
-setTimeout(() => {
-  ferrets.forEach(ferret => {
-    const love = sample(loves)
-    bot.sendMessage(ferret, love);
-  });
-}, 1000)
+if (!__DEV__) {
+  setTimeout(() => {
+    ferrets.forEach(ferret => {
+      const love = sample(loves)
+      bot.sendMessage(ferret, love);
+    });
+    try {
+      const lastCommitMessage = fs.readFileSync(__dirname + '/../last_commit_message.txt').toString();
+      bot.sendMessage(mgbetaChatId, lastCommitMessage);
+    } catch(err){
+      console.error(err);
+      
+    }
+  }, 1000);
+}
+
 
 
 // Matches /echo [whatever]

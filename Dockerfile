@@ -13,6 +13,7 @@ WORKDIR /app
 
 # Bundle app source
 COPY ./build /app
+COPY ./last_commit_message.txt /app/last_commit_message.txt
 RUN npm install
 # COPY ./node_modules /app/node_modules
 # COPY . /app

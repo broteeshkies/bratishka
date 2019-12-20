@@ -6,12 +6,12 @@ import { worker } from 'cluster';
 
 const deanonMessages = ({ username, deanons }) => {
   const msg = sample([
-    `🙄 Такую хуету мог написать только <b>${username}</b>`,
-    `Вот ты и спалился, <b>${username}</b>`,
-    `Этим хорьком был А̶л̶ь̶б̶е̶р̶т̶ ̶Э̶й̶н̶ш̶т̶е̶й̶н̶ <b>${username}</b>`,
-    `!!!ВНЕЗАПНЫЙ ДЕАНОН!!!\nХорек — <b>${username}</b>`,
-    `Ну вы и так поняли, что это <b>${username}</b>`,
-    `По всем вопросам к n̶a̶t̶a̶v̶t̶s̶ <b>${username}</b>`,
+    `🙄 Такую хуету мог написать только ${username}`,
+    `Вот ты и спалился, ${username}`,
+    `Этим хорьком был А̶л̶ь̶б̶е̶р̶т̶ ̶Э̶й̶н̶ш̶т̶е̶й̶н̶ ${username}`,
+    `!!!ВНЕЗАПНЫЙ ДЕАНОН!!!\nХорек — ${username}`,
+    `Ну вы и так поняли, что это ${username}`,
+    `По всем вопросам к n̶a̶t̶a̶v̶t̶s̶ ${username}`,
   ]);
   return `${deanons.map(e => `@${e}`).join(' ')}\n\n${msg}`;
 };
@@ -19,7 +19,7 @@ const deanonMessages = ({ username, deanons }) => {
 
 export default class deanonVotes extends Action {
   test(message) {
-    return message.chat.id === mgbetaChatId && this.testMessageRegExp(message, /(deanon|деанон)/);
+    return message.chat.id === mgbetaChatId && this.testMessageRegExp(message, /(deanon|деанон|дианон)/);
   }
 
   doAction(message) {
