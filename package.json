@@ -11,6 +11,7 @@
   ],
   "main": "index.js",
   "dependencies": {
+    "@babel/polyfill": "^7.7.0",
     "@babel/runtime": "^7.7.7",
     "@lskjs/config": "^0.35.103",
     "@lskjs/utils": "^0.35.103",
