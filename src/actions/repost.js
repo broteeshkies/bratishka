@@ -8,6 +8,7 @@ export default class ReportAction extends Action {
     super(...args);
     this.name = 'ReportAction';
   }
+  
   test(message) {
     // console.log(11111, message);
     return true
