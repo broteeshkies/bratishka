@@ -1,5 +1,6 @@
 import Action from './Action';
-import { anonMessages, mgbetaChatId, REPLY_COUNT } from './mgbeta';
+import { deanonVoteCount } from '../config/consts'
+import { anonMessages, mgbetaChatId } from '../config/chats'
 import sample from 'lodash/sample';
 import get from 'lodash/get';
 import { worker } from 'cluster';

@@ -10,6 +10,68 @@ export default class Action {
     return text.match(regExp) != null;
   }
 
+  async report({message, chatId}) {
+    const data = { };
+    if (message.sticker) {
+      data.type = 'sticker';
+      data.method = 'sendSticker';
+      data.path = message.sticker.file_id;
+    }
+    if (message.photo) {
+      data.type = 'photo';
+      data.method = 'sendPhoto';
+      data.text = message.caption || '';
+      data.path = message.photo[0].file_id;
+      data.opt = {
+        caption: message.caption,
+      };
+    }
+    if (message.voice) {
+      data.type = 'voice';
+      data.method = 'sendVoice';
+      data.path = message.voice.file_id;
+    }
+    if (message.video_note) {
+      data.type = 'video_note';
+      data.method = 'sendVideoNote';
+      data.path = message.video_note.file_id;
+    }
+    if (message.video) {
+      data.type = 'video';
+      data.method = 'sendVideo';
+      data.path = message.video.file_id;
+    }
+    if (message.location) {
+      data.type = 'location';
+      data.method = 'sendLocation';
+      data.path = message.location.latitude;
+      data.opt = message.location.longitude;
+    }
+    if (message.document) {
+      data.type = 'document';
+      data.method = 'sendDocument';
+      data.path = message.document.file_id;
+      data.opt = {
+        caption: message.caption,
+      };
+    }
+    if (message.text) {
+      data.type = 'text';
+      data.method = 'sendMessage';
+      data.path = message.text;
+    }
+    if (message.audio) {
+      data.type = 'audio';
+      data.method = 'sendAudio';
+      data.path = message.audio.file_id;
+    }
+    if (data.method) {
+      await this.bot[ata.method](chatId, data.path, data.opt || {});
+    } else {
+      console.error('НАТА РЕАЛИЗУЙ МЕНЯ', message);
+    }
+  }
+
   testGroupId(message, id) {
     const chatId = message.chat.id || message.from.id;
     return chatId == id;

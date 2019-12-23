@@ -1,0 +1,1 @@
+export const deanonVoteCount = 6;

@@ -49,6 +49,7 @@ const deanonRatioSteps = [
 
 export default class MgbetaAction extends Action {
   test(message) {
+    if (__DEV__) return false;
     return message.chat.id > 0;
     if (message.chat.id > 0) return true;
     return false;

@@ -8,7 +8,7 @@ import TelegramBot from 'node-telegram-bot-api';
 import dotenv from 'dotenv';
 import sample from 'lodash/sample';
 import { ferrets } from './ferret';
-import { mgbetaChatId } from './actions/mgbeta';
+import { mgbetaChatId } from './config/chats';
 
 
 const __DEV__ = process.env.USER === 'isuvorov'
@@ -27,6 +27,8 @@ const token = process.env.TOKEN;
 
 
 const actionClasses = [
+  require('./actions/repost').default,
+  require('./actions/privateMessage').default,
   require('./actions/antons').default,
   require('./actions/odnoklassniki').default,
   require('./actions/bratishka').default,
@@ -35,7 +37,6 @@ const actionClasses = [
   require('./actions/tuesday').default,
   require('./actions/bratbratan').default,
   require('./actions/counter').default,
-  require('./actions/mgbeta').default,
   require('./actions/mobx').default,
   require('./actions/boobs').default,
   require('./actions/today').default,
@@ -47,7 +48,6 @@ const actionClasses = [
   // require('./actions/satan').default,
   require('./actions/places').default,
   require('./actions/polundra').default,
-  require('./actions/videoNote').default,
   require('./actions/deanonVotes').default,
 ];
 
@@ -136,6 +136,7 @@ bot.on('message', (message) => {
   // }
   if (message.date * 1000 < freshDate) return false;
   actions.forEach((action) => {
+    if (__DEV__) console.log('action.test', action.name)
     if (action.test(message)) {
       action.doAction(message);
     }
