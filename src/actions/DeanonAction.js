@@ -1,9 +1,12 @@
 import Action from './Action';
 import { deanonVoteCount } from '../config/consts'
-import { anonMessages, mgbetaChatId } from '../config/chats'
+import { mainChatId } from '../config/chats'
 import sample from 'lodash/sample';
 import get from 'lodash/get';
 import { worker } from 'cluster';
+import { anonMessages } from './PrivateMessageAction';
+
+
 
 const deanonMessages = ({ username, deanons }) => {
   const msg = sample([
@@ -18,9 +21,9 @@ const deanonMessages = ({ username, deanons }) => {
 };
 
 
-export default class deanonVotes extends Action {
+export default class DeanonAction extends Action {
   test(message) {
-    return message.chat.id === mgbetaChatId && this.testMessageRegExp(message, /(deanon|деанон|дианон)/);
+    return message.chat.id === mainChatId && this.testMessageRegExp(message, /(deanon|деанон|дианон)/);
   }
 
   doAction(message) {
@@ -34,7 +37,7 @@ export default class deanonVotes extends Action {
       anons.count.push(userPoll);
       if (anons.count.length >= REPLY_COUNT) {
         const { username } = anons;
-        this.bot.sendMessage(mgbetaChatId, deanonMessages({ username, deanons: anons.count }), {
+        this.bot.sendMessage(mainChatId, deanonMessages({ username, deanons: anons.count }), {
           reply_to_message_id: keyMsgId,
         });
         delete anonMessages[message.message_id];

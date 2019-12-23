@@ -66,8 +66,6 @@ export default class Action {
       data.path = message.audio.file_id;
     }
     if (data.method) {
-      console.log('data.method', data.method);
-      
       await this.bot[data.method](chatId, data.path, data.opt || {});
     } else {
       console.error('НАТА РЕАЛИЗУЙ МЕНЯ', message);

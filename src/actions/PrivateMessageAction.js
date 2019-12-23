@@ -1,12 +1,18 @@
 import Action from './Action';
 import get from 'lodash/get';
 import sample from 'lodash/sample';
-import { reportChatId } from '../config/chats';
+import { deanonVoteTime } from '../config/consts';
+import { repostChatId } from '../config/chats';
 
 export const anonMessages = {};
-const pollTime = 1000 * 60 * 7; // продоложительность опроса в мс.
 
-export default class MgbetaAction extends Action {
+export default class PrivateMessageAction extends Action {
+  // name = 'PrivateMessageAction;
+  constructor(...args) {
+    super(...args);
+    this.name = 'PrivateMessageAction';
+  }
+
   test(message) {
     return message.chat.id > 0;
   }
@@ -16,9 +22,9 @@ export default class MgbetaAction extends Action {
     anonMessages[message.message_id] = { message, count: [], username };
     setTimeout(() => {
       delete anonMessages[message.message_id];
-    }, pollTime);
+    }, deanonVoteTime);
     return this.repost({
-      chatId: reportChatId,
+      chatId: repostChatId,
       message
     });
   }
