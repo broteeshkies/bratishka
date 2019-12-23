@@ -10,7 +10,7 @@ export default class Action {
     return text.match(regExp) != null;
   }
 
-  async report({message, chatId}) {
+  async repost({message, chatId}) {
     const data = { };
     if (message.sticker) {
       data.type = 'sticker';
@@ -66,7 +66,9 @@ export default class Action {
       data.path = message.audio.file_id;
     }
     if (data.method) {
-      await this.bot[ata.method](chatId, data.path, data.opt || {});
+      console.log('data.method', data.method);
+      
+      await this.bot[data.method](chatId, data.path, data.opt || {});
     } else {
       console.error('НАТА РЕАЛИЗУЙ МЕНЯ', message);
     }

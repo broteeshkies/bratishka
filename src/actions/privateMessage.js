@@ -17,7 +17,7 @@ export default class MgbetaAction extends Action {
     setTimeout(() => {
       delete anonMessages[message.message_id];
     }, pollTime);
-    this.report({
+    return this.repost({
       chatId: reportChatId,
       message
     });

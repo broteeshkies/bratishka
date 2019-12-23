@@ -8,7 +8,7 @@ export default class ReportAction extends Action {
     super(...args);
     this.name = 'ReportAction';
   }
-  
+
   test(message) {
     // console.log(11111, message);
     return true
@@ -23,7 +23,7 @@ export default class ReportAction extends Action {
     } 
     if (message.text === '+' && !!message.reply_to_message) {
       console.log('REPLY!!!!');
-      this.report({
+      this.repost({
         chatId: reportChatId,
         message
       });
