@@ -1,22 +1,15 @@
-FROM node:6.9.2
+FROM node:12.10.0
 
-# Create app directory
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
+
 WORKDIR /app
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-# COPY package*.json ./
-
-# If you are building your code for production
-# RUN npm install --only=production
-
-# Bundle app source
-COPY ./build /app
-COPY ./last_commit_message.txt /app/last_commit_message.txt
+COPY package.json /app/package.json
+COPY package-lock.json /app/package-lock.json
 RUN npm install
-# COPY ./node_modules /app/node_modules
-# COPY . /app
+COPY build /app
+COPY ./last_commit_message.txt /app/last_commit_message.txt
 
 EXPOSE 8080
 CMD [ "npm", "start" ]
