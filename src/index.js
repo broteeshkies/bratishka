@@ -1,5 +1,4 @@
 import ready from '@lskjs/utils/polyfill';
-import 'babel-polyfill';
 import './fix';
 import 'isomorphic-fetch';
 import path from 'path';
