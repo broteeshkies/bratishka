@@ -67,7 +67,7 @@ https://gitlab.isuvorov.com/mgbeta/bratishka/commit/${commitId}
 `.trim()
     
 
-      if (force || (commitIsNew && )) {
+      if (force || (commitIsNew && !commitFlood)) {
         this.bot.sendMessage(chatId, message);
       }
     } catch(err){
