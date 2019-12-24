@@ -1,6 +1,6 @@
 import Action from './Action';
 
-export { repostChatId, mediaChatId } from '../config/chats'
+import { repostChatId, mediaChatId } from '../config/chats'
 
 export default class RepostAction extends Action {
   // name = 'ReportAction;
