@@ -2,7 +2,7 @@ import Action from './Action';
 import get from 'lodash/get';
 import sample from 'lodash/sample';
 import { deanonVoteTime } from '../config/consts';
-import { repostChatId } from '../config/chats';
+import { mainChatId } from '../config/chats';
 
 export const anonMessages = {};
 
@@ -24,7 +24,7 @@ export default class PrivateMessageAction extends Action {
       delete anonMessages[message.message_id];
     }, deanonVoteTime);
     return this.repost({
-      chatId: repostChatId,
+      chatId: mainChatId,
       message
     });
   }
