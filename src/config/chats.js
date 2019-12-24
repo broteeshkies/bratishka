@@ -5,8 +5,8 @@ export const pornoChatId = -1001296980004;
 
 
 
-export const mainChatId = __DEV__ ? botovodChatId : pornoChatId;
+export const mainChatId = __DEV__ ? botovodChatId : mgbetaChatId;
 export const mediaChatId = __DEV__ ? botovodChatId : pornoChatId;
-export const repostChatId = __DEV__ ? botovodChatId : mgbetaChatId;
+export const repostChatId = __DEV__ ? botovodChatId : pornoChatId;
 
 export default { mainChatId, mediaChatId, repostChatId };
