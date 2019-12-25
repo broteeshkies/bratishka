@@ -6,8 +6,6 @@ import get from 'lodash/get';
 import { worker } from 'cluster';
 import { anonMessages } from './PrivateMessageAction';
 
-
-
 const deanonMessages = ({ username, deanons }) => {
   const msg = sample([
     `🙄 Такую хуету мог написать только ${username}`,
@@ -23,19 +21,26 @@ const deanonMessages = ({ username, deanons }) => {
 
 export default class DeanonAction extends Action {
   test(message) {
-    return message.chat.id === mainChatId && this.testMessageRegExp(message, /(deanon|деанон|дианон)/);
+    return message.chat.id === mainChatId && this.testMessageRegExp(message, /(deanon|деанон|дианон)/) || message.text === '?';
   }
 
   doAction(message) {
     if (message.reply_to_message) {
       const userPoll = message.from.username;
+      console.log('DeanonAction.doAction', {anonMessages, userPoll});
       const keyMsgId = get(message, 'reply_to_message.message_id');
+      console.log({keyMsgId});
+      
       if (!keyMsgId) return;
       const anons = anonMessages[keyMsgId];
+      console.log({anons});
+
       if (!anons) return;
       if (anons.count.includes(userPoll)) return;
+      console.log('pushs');
+
       anons.count.push(userPoll);
-      if (anons.count.length >= REPLY_COUNT) {
+      if (anons.count.length >= deanonVoteCount) {
         const { username } = anons;
         this.bot.sendMessage(mainChatId, deanonMessages({ username, deanons: anons.count }), {
           reply_to_message_id: keyMsgId,

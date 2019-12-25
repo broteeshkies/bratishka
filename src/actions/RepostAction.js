@@ -2,6 +2,7 @@ import Action from './Action';
 
 import { repostChatId, mediaChatId } from '../config/chats'
 
+const likes = ['+', '👍', '➕'].map(a => a.codePointAt(0));
 export default class RepostAction extends Action {
   // name = 'ReportAction;
   constructor(...args) {
@@ -17,11 +18,18 @@ export default class RepostAction extends Action {
     if (!!message.video_note && message.chat.id !== mediaChatId) {
       this.bot.sendVideoNote(mediaChatId, message.video_note.file_id);
     } 
-    if (message.text === '+' && !!message.reply_to_message) {
-      console.log('REPLY!!!!');
+    
+    let firstSign;
+    if (message && message.text && message.text.codePointAt) {
+      firstSign =  message.text.codePointAt(0);
+    } else if (message && message.sticker && message.sticker.emoji) {
+      firstSign = message.sticker.emoji.codePointAt(0);
+    }
+    if (firstSign && likes.includes(firstSign) && !!message.reply_to_message) {
       this.repost({
         chatId: repostChatId,
-        message
+        forwardFrom: (message.chat && message.chat.id) || (message.from && message.from.id),
+        message: message.reply_to_message,
       });
     }
   }

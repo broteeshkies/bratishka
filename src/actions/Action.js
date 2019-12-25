@@ -10,7 +10,7 @@ export default class Action {
     return text.match(regExp) != null;
   }
 
-  async repost({message, chatId}) {
+  async repost({message, chatId, forwardFrom}) {
     const data = { };
     if (message.sticker) {
       data.type = 'sticker';
@@ -65,7 +65,9 @@ export default class Action {
       data.method = 'sendAudio';
       data.path = message.audio.file_id;
     }
-    if (data.method) {
+    if (forwardFrom) {
+      await this.bot.forwardMessage(chatId, forwardFrom, message.message_id);
+    } else if (data.method) {
       await this.bot[data.method](chatId, data.path, data.opt || {});
     } else {
       console.error('НАТА РЕАЛИЗУЙ МЕНЯ', message);
