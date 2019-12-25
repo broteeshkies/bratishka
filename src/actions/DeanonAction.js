@@ -18,12 +18,11 @@ const deanonMessages = ({ username, deanons }) => {
   return `${deanons.map(e => `@${e}`).join(' ')}\n\n${msg}`;
 };
 
-
 export default class DeanonAction extends Action {
   test(message) {
-    return message.chat.id === mainChatId && this.testMessageRegExp(message, /(deanon|деанон|дианон)/) || message.text === '?';
+    // а почему только главный чат??
+    return message.chat.id === mainChatId && (this.testMessageRegExp(message, /(deanon|деанон|дианон)/) || message.text === '?');
   }
-
   doAction(message) {
     if (message.reply_to_message) {
       const userPoll = message.from.username;
