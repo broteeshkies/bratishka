@@ -27,18 +27,11 @@ export default class DeanonAction extends Action {
   doAction(message) {
     if (message.reply_to_message) {
       const userPoll = message.from.username;
-      console.log('DeanonAction.doAction', {anonMessages, userPoll});
       const keyMsgId = get(message, 'reply_to_message.message_id');
-      console.log({keyMsgId});
-      
       if (!keyMsgId) return;
       const anons = anonMessages[keyMsgId];
-      console.log({anons});
-
       if (!anons) return;
       if (anons.count.includes(userPoll)) return;
-      console.log('pushs');
-
       anons.count.push(userPoll);
       if (anons.count.length >= deanonVoteCount) {
         const { username } = anons;
