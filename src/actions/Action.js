@@ -66,11 +66,12 @@ export default class Action {
       data.path = message.audio.file_id;
     }
     if (forwardFrom) {
-      await this.bot.forwardMessage(chatId, forwardFrom, message.message_id);
+      return this.bot.forwardMessage(chatId, forwardFrom, message.message_id);
     } else if (data.method) {
-      await this.bot[data.method](chatId, data.path, data.opt || {});
+      return this.bot[data.method](chatId, data.path, data.opt || {});
     } else {
       console.error('НАТА РЕАЛИЗУЙ МЕНЯ', message);
+      return null
     }
   }
 

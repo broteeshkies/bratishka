@@ -17,15 +17,16 @@ export default class PrivateMessageAction extends Action {
     return message.chat.id > 0;
   }
 
-  doAction(message) {
+  async doAction(message) {
     const { first_name, last_name, username } = message.from;
-    anonMessages[message.message_id] = { message, count: [], username };
-    setTimeout(() => {
-      delete anonMessages[message.message_id];
-    }, deanonVoteTime);
-    return this.repost({
+    const sendedMessage = await this.repost({
       chatId: mainChatId,
       message
     });
+    if (!sendedMessage) return;
+    anonMessages[sendedMessage.message_id] = { message, count: [], username };
+    setTimeout(() => {
+      delete anonMessages[sendedMessage.message_id];
+    }, deanonVoteTime);
   }
 }
