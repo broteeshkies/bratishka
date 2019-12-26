@@ -8,11 +8,17 @@ const animation = [
 ];
 
 export default class CounterAction extends Action {
+  constructor(...args) {
+    super(...args);
+    this.name = 'CounterAction';
+  }
+
   test(message) {
     return this.testMessageRegExp(message, /инферно/);
   }
 
   doAction(message) {
+    this.log('doAction');
     let counter = 0;
     const bot = this.bot;
     const chatId = message.chat.id || message.from.id;

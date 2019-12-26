@@ -2,6 +2,10 @@ import sample from 'lodash/sample';
 import Action from './Action';
 
 export default class AzazaAction extends Action {
+  constructor(...args) {
+    super(...args);
+    this.name = 'AzazaAction';
+  }
 
   messages = [
     'очень весело',
@@ -18,6 +22,7 @@ export default class AzazaAction extends Action {
   }
 
   doAction(message) {
+    this.log('doAction');
     this.sendMessage(message, sample(this.messages));
   }
 }

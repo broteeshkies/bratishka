@@ -2,6 +2,10 @@ import sample from 'lodash/sample';
 import Action from './Action';
 
 export default class CatsAction extends Action {
+  constructor(...args) {
+    super(...args);
+    this.name = 'CatsAction';
+  }
 
   messages = [
     'нет, ты котик',
@@ -11,7 +15,8 @@ export default class CatsAction extends Action {
     'кот-котэ-котик-ко_тян_дроч_ка',
     'килограмм корма за хурму!1!!!1!!',
     'а можно фотку киски ?'
-  ]
+  ];
+
   narcos = [
     'нАрКотИК!!1!!',
     'сам ты наркотик пушистый',
@@ -25,14 +30,16 @@ export default class CatsAction extends Action {
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_y1ToALEpzY0SRUBFCc-Tscs3WU2wjLNkW5ZcvPLF_K2a8A8P&s',
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3RJuURRZPFb_xl5Db-1f8SxDqbmVh043DgJg0PYglm2aUbt90vA&s',
     'https://i.pinimg.com/originals/19/6a/c6/196ac68e994e399f80d55c7e8d65f134.jpg',
-  ]
+  ];
+
+  test(message) {
+    return this.testMessageRegExp(message, /котик|кусь/);
+  }
 
   async getCat(message) {
     try {
       const resp = await fetch('https://api.thecatapi.com/v1/images/search?size=full');
-      // resp in json format
       const data = await resp.json();
-      //const url = data[0].url;
       const [{ url }] = data;
       
       this.sendPhoto(message, url);
@@ -43,6 +50,7 @@ export default class CatsAction extends Action {
   }
    
   doAction(message) {
+    this.log('doAction');
     if(this.testMessageRegExp(message, /наркотик|наркусь/)) {
       return this.sendMessage(message, sample(this.narcos));
     }
@@ -50,10 +58,5 @@ export default class CatsAction extends Action {
       this.getCat(message) :
       this.sendMessage(message, sample(this.messages));
   }
-
-  test(message) {
-    return this.testMessageRegExp(message, /котик|кусь/);
-  }
-
 }
 

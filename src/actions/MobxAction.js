@@ -2,6 +2,11 @@ import sample from 'lodash/sample';
 import Action from './Action';
 
 export default class MobxAction extends Action {
+  constructor(...args) {
+    super(...args);
+    this.name = 'MobxAction';
+  }
+
   stickers = [
     'CAADAQAD_gIAAnTnKwIX_7XQo_4iNAI',
     'CAADAQADGgMAAnTnKwLmqhhn5jh30QI',
@@ -14,12 +19,14 @@ export default class MobxAction extends Action {
     'CAADAQADVgIAAnTnKwIvX-j-bpQTmwI',
     'CAADAgADSAMAAswJPAb82xsr_NCvTQI',
     'CAADAgADRgMAAswJPAaflgVlsoibuAI',
-  ]
+  ];
+
   test(message) {
     return this.testMessageRegExp(message, /\bmobx|typescript|backbone|angular|erlang\b/)  && this.percentProbability(50);
   }
 
   doAction(message) {
+    this.log('doAction');
     this.sendSticker(message, sample(this.stickers), {
       reply: 100
     });

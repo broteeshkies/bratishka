@@ -1,20 +1,14 @@
 import ready from '@lskjs/utils/polyfill';
 import './fix';
 import 'isomorphic-fetch';
-import path from 'path';
 import TelegramBot from 'node-telegram-bot-api';
-import sample from 'lodash/sample';
-import { ferrets } from './ferret';
-import { mgbetaChatId } from './config/chats';
 import getActions from './actions';
 import config from './config';
 ready();
 
 const bot = new TelegramBot(config.token, { polling: true });
 const freshDate = Date.now();
-const actions = getActions({ bot});
-
-
+const actions = getActions({ bot });
 
 bot.on('message', (message) => {
   if (__DEV__) console.log('[M] ', message);
@@ -28,6 +22,7 @@ bot.on('message', (message) => {
   // }
   if (message.date * 1000 < freshDate) return false;
   actions.forEach((action) => {
+    action.log('test');
     try {
       if (action.test(message)) {
         action.doAction(message);
@@ -40,7 +35,6 @@ bot.on('message', (message) => {
   return false;
 });
 console.log('Bot successful runned with ' + actions.length + ' actions');
-
 
 setTimeout(() => {
   actions.forEach(action => {

@@ -4,15 +4,17 @@ import Action from './Action';
 
 let prevMessage = null;
 export default class GayAction extends Action {
-  test(message) {
-    const { text } = message;
-    const { username } = message.from;
+  constructor(...args) {
+    super(...args);
+    this.name = 'GayAction';
+  }
 
-    // console.log(`@${username}: ${text}`, message);
+  test(message) {
     return this.testMessageRegExp(message, /гей|пидор|pidor|секс|хуй|стоял/);
   }
 
   async doAction(message) {
+    this.log('doAction');
     const gifs = [ // Взял гифки из логов, хз что там в них
       'CgADAgADogIAAvLPCEhv8LYMDZzZHQI',
       'CgADBAADzKkAAt4cZAfc21j3XfislgI',

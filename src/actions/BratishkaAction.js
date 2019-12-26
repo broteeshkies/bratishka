@@ -1,7 +1,11 @@
 import Action from './Action';
 import sample from 'lodash/sample';
 
-export default class BatishkaAction extends Action {
+export default class BratishkaAction extends Action {
+  constructor(...args) {
+    super(...args);
+    this.name = 'BratishkaAction';
+  }
 
   messages = [
     'да-да?',
@@ -16,6 +20,7 @@ export default class BatishkaAction extends Action {
   }
 
   doAction(message) {
+    this.log('doAction');
     this.sendMessage(message, sample(this.messages));
   }
 }

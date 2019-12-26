@@ -6,8 +6,9 @@ import lowerCase from 'lodash/lowerCase';
 import upperCase from 'lodash/upperCase';
 import translate from '../lib/translate';
 import Action from './Action';
+import config from '../config';
 
-const { FSQR_CLIENT_ID, FSQR_CLIENT_SECRET } = process.env;
+const { foursquare = {} } = config;
 const HOST = 'https://api.foursquare.com/v2';
 const ERR_MSG = 'Извини, я забыл как искать. Возможно когда-нибудь вспомню.';
 
@@ -122,6 +123,11 @@ const phrases = [
 const rx = new RegExp(`(${phrases.join('|')})о? ([A-Za-zА-Яа-я0-9- ]+)`, 'i');
 
 export default class PlacesAction extends Action {
+  constructor(...args) {
+    super(...args);
+    this.name = 'PlacesAction';
+  }
+
   test(message) {
     return this.testMessageRegExp(message, rx);
   }
@@ -139,14 +145,14 @@ export default class PlacesAction extends Action {
   }
 
   async getPhoto(v, venueId) {
-    if (!FSQR_CLIENT_ID && !FSQR_CLIENT_SECRET) {
+    if (!foursquare.clientId && !foursquare.clientSecret) {
       return null;
     }
     try {
       const res = await fetch(
         `${HOST}/venues/${venueId}/photos?${qs.stringify({
-          client_id: FSQR_CLIENT_ID,
-          client_secret: FSQR_CLIENT_SECRET,
+          client_id: foursquare.clientId,
+          client_secret: foursquare.clientSecret,
           limit: 1,
           group: 'venue',
           v,
@@ -169,7 +175,7 @@ export default class PlacesAction extends Action {
   }
 
   async findVenues(v, near, section) {
-    if (!FSQR_CLIENT_ID && !FSQR_CLIENT_SECRET) {
+    if (!foursquare.clientId && !foursquare.clientSecret) {
       return {
         caption: ERR_MSG,
       };
@@ -178,8 +184,8 @@ export default class PlacesAction extends Action {
     try {
       const res = await fetch(
         `${HOST}/venues/explore?${qs.stringify({
-          client_id: FSQR_CLIENT_ID,
-          client_secret: FSQR_CLIENT_SECRET,
+          client_id: foursquare.clientId,
+          client_secret: foursquare.clientSecret,
           v,
           limit: 5,
           sortByPopularity: 1,
@@ -263,6 +269,7 @@ ${venue.address}` : ''}
   }
 
   async doAction(message) {
+    this.log('doAction');
     const { text } = message;
     const [, action, cityRaw] = rx.exec(text);
     const bot = this.bot;
@@ -271,8 +278,7 @@ ${venue.address}` : ''}
     const options = { reply_to_message_id: message.message_id };
     bot.sendMessage(chatId, sample(startSearchPhrases), options);
     const city = await this.prepareCityName(cityRaw);
-    // console.log(city);
-    const { photos, caption } = await this.findVenues('20191127', city, section);
+    const { photos, caption } = await this.findVenues('20191226', city, section);
     let media = [];
     if (photos && Array.isArray(photos)) {
       media = photos.map((photo, index) => ({

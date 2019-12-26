@@ -2,6 +2,10 @@ import Action from './Action';
 import sample from 'lodash/sample';
 
 export default class BayanAction extends Action {
+  constructor(...args) {
+    super(...args);
+    this.name = 'BayanAction';
+  }
 
   messages = [
     'зачем это здесь?',
@@ -24,6 +28,7 @@ export default class BayanAction extends Action {
   }
 
   doAction(message) {
+    this.log('doAction');
     this.sendMessage(message, sample(this.messages));
     this.sendSticker(message, 'CAADAgADcAUAAhC6EgABord0yKqaTVUC');
   }

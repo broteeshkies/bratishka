@@ -4,7 +4,6 @@ import { repostChatId, mediaChatId } from '../config/chats'
 
 const likes = ['+', '👍', '➕'].map(a => a.codePointAt(0));
 export default class RepostAction extends Action {
-  // name = 'ReportAction;
   constructor(...args) {
     super(...args);
     this.name = 'RepostAction';
@@ -15,6 +14,7 @@ export default class RepostAction extends Action {
   }
 
   doAction(message) {
+    this.log('doAction');
     if (!!message.video_note && message.chat.id !== mediaChatId) {
       this.bot.sendVideoNote(mediaChatId, message.video_note.file_id);
     } 

@@ -7,7 +7,6 @@ import { mainChatId } from '../config/chats';
 export const anonMessages = {};
 
 export default class PrivateMessageAction extends Action {
-  // name = 'PrivateMessageAction;
   constructor(...args) {
     super(...args);
     this.name = 'PrivateMessageAction';
@@ -18,10 +17,11 @@ export default class PrivateMessageAction extends Action {
   }
 
   async doAction(message) {
-    const { first_name, last_name, username } = message.from;
+    this.log('doAction');
+    const { username } = message.from;
     const sendedMessage = await this.repost({
       chatId: mainChatId,
-      message
+      message,
     });
     if (!sendedMessage) return;
     anonMessages[sendedMessage.message_id] = { message, count: [], username };

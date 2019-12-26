@@ -43,10 +43,6 @@ export default class InitAction extends Action {
     this.sendCommit(mainChatId);
   }
 
-  doAction(message) {
-    this.sendCommit(message.chat.id, true);
-  }
-
   sendCommit(chatId, force) {
     try {
       const dirname = __dirname + (__DEV__ ? '/../..' : '/..' );
@@ -73,5 +69,10 @@ https://gitlab.isuvorov.com/mgbeta/bratishka/commit/${commitId}
     } catch(err){
       console.error(err);
     }
+  }
+
+  doAction(message) {
+    this.log('doAction');
+    this.sendCommit(message.chat.id, true);
   }
 }

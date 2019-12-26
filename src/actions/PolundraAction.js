@@ -1,6 +1,10 @@
 import Action from './Action';
 
-export default class WinAction extends Action {
+export default class PolundraAction extends Action {
+  constructor(...args) {
+    super(...args);
+    this.name = 'PolundraAction';
+  }
 
   users = [
     'isuvorov',
@@ -69,14 +73,14 @@ export default class WinAction extends Action {
     'shmelevs',
     'konstantinevdokimov',
     'SergioBabinetsC',
-  ]
-
+  ];
 
   test(message) {
     return this.testMessageRegExp(message, /полундра/) && this.percentProbability(100);
   }
 
   doAction(message) {
+    this.log('doAction');
     this.sendMessage(message, 'Нас АТАКУЮТ!');
     this.sendMessage(message, 'ПОЛУДРА!!!'  + this.users.map(a => '@' + a).join(' '));
   }
