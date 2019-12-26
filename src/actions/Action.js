@@ -137,7 +137,7 @@ export default class Action {
     })
   }
 
-  editMessage(msg, text, params = {}) {
+  editMessage(msg, text) {
     msg.then((sended) => {
       const chatId = sended.chat.id;
       const messageId = sended.message_id;
