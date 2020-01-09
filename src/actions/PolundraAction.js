@@ -11,7 +11,6 @@ export default class PolundraAction extends Action {
     'volkovpishet',
     'natavts',
     'anoru',
-    'immuzov',
     'antouhou',
     'yukioru',
     'durob',
