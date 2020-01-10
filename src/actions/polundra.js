@@ -70,7 +70,7 @@ export default class WinAction extends Action {
     'konstantinevdokimov',
     'SergioBabinetsC',
     'please_rtfm',
-    'Vladik_Deniska'
+    'Vladik_Deniska',
     'BadRussiano',
     'jomopel',
     's0phiyabezruk',
