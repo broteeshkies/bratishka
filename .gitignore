@@ -4,3 +4,4 @@ npm-debug.log
 dist
 .env
 build
+package-lock.json
