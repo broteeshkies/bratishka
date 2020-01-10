@@ -1,5 +1,4 @@
 import ready from '@lskjs/utils/polyfill';
-import './fix';
 import 'isomorphic-fetch';
 import TelegramBot from 'node-telegram-bot-api';
 import getActions from './actions';

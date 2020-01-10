@@ -16,7 +16,7 @@
     "@lskjs/config": "^0.35.103",
     "@lskjs/utils": "^0.35.103",
     "babel-polyfill": "^6.26.0",
-    "bluebird": "3.5.1",
+    "@broteeshkies/bluebird": "^3.7.3",
     "dotenv": "2.0.0",
     "isomorphic-fetch": "2.2.1",
     "lodash": "4.17.11",

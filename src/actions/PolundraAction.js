@@ -72,7 +72,13 @@ export default class PolundraAction extends Action {
     'shmelevs',
     'konstantinevdokimov',
     'SergioBabinetsC',
-  ];
+    'please_rtfm',
+    'Vladik_Deniska',
+    'BadRussiano',
+    'jomopel',
+    's0phiyabezruk',
+  ]
+
 
   test(message) {
     return this.testMessageRegExp(message, /полундра/) && this.percentProbability(100);
