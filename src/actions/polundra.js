@@ -69,6 +69,11 @@ export default class WinAction extends Action {
     'shmelevs',
     'konstantinevdokimov',
     'SergioBabinetsC',
+    'please_rtfm',
+    'Vladik_Deniska'
+    'BadRussiano',
+    'jomopel',
+    's0phiyabezruk',
   ]
 
 
