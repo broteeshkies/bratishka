@@ -33,6 +33,7 @@
     "babel-preset-es2015": "6.24.1",
     "babel-preset-stage-2": "6.24.1",
     "commitlint": "8.3.4",
+    "cz-customizable": "6.2.0",
     "eslint": "6.8.0",
     "eslint-config-airbnb-base": "11.1.0",
     "eslint-config-prettier": "6.9.0",
@@ -50,6 +51,7 @@
   },
   "scripts": {
     "start": "node index.js",
+    "commit": "./node_modules/cz-customizable/standalone.js -S",
     "lint": "eslint . --ext .js,.ts",
     "lint-fix": "eslint . --ext .js --fix",
     "format-check": "prettier --list-different \"./**/*.js\"",
@@ -61,6 +63,11 @@
     "build2": "rm -rf build2 && mkdir build2 && cp package.json build2/ && cp yarn.lock build2/ && cp README.md build2/ && babel src --out-dir build2 --source-maps inline --copy-files",
     "dev": "nodemon --watch src --exec babel-node src/index.js",
     "dev-build": "DEBUG=1 npm run build -- --watch"
+  },
+  "config": {
+    "cz-customizable": {
+      "config": ".czrc.js"
+    }
   },
   "commitlint": {
     "extends": [
