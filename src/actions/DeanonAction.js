@@ -40,6 +40,11 @@ export default class DeanonAction extends Action {
       if (anons.count.includes(userPoll)) return;
       anons.count.push(userPoll);
       if (anons.count.length >= deanonVoteCount) {
+        /**
+         * Братишки, я хочу сыграть с вами в игру. В боте что-то работает не так как должно,
+         * но что именно вы должны догадаться сами. Могу дать первую подсказку.
+         * Собственно, это сообщение и есть подсказка.
+         */
         const { username } = anons;
         this.bot.sendMessage(mainChatId, deanonMessages({ username, deanons: anons.count }), {
           reply_to_message_id: keyMsgId,
