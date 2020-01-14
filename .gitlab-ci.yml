@@ -36,6 +36,8 @@ npm:
      # - node_modules/
      - build/
      - last_commit_message.txt
+  only:
+    - master
 
 create_image:
   stage: create_image
@@ -48,12 +50,16 @@ create_image:
     - docker push ${CONTAINER_IMAGE_TAG}
   dependencies:
     - npm
+  only:
+    - master
 
 test:
   stage: test
   image: docker:latest
   script:
     - echo "ok"
+  only:
+    - master
 
 depoy:
   stage: deploy
