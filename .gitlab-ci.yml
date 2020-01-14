@@ -64,15 +64,13 @@ test:
 depoy:
   stage: deploy
   script:
-    - echo "${EXPOSE_PORTTT}"
     - echo "docker stack deploy --with-registry-auth --compose-file=docker-compose.yml ${CONTAINER_IMAGE_CONCAT}"
     - docker stack deploy --with-registry-auth --compose-file=docker-compose.yml ${CONTAINER_IMAGE_CONCAT}
   environment:
     name: master
-    url: https://master.buzz.guru
+    url: https://bratishka.mgbeta.ru
   variables:
     STAGE: master
-    EXPOSE_PORTTT: 8015
   only:
     - master
   # tags: # FOR RUNNER!
