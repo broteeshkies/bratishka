@@ -13,7 +13,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.7.0",
     "@babel/runtime": "^7.7.7",
-    "@lskjs/config": "^0.35.103",
+    "@lskjs/config": "^0.35.122",
     "@lskjs/utils": "^0.35.103",
     "babel-polyfill": "^6.26.0",
     "bluebird": "3.5.1",
