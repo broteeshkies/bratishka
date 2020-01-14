@@ -6,6 +6,8 @@ import getActions from './actions';
 import config from './config';
 ready();
 
+console.log({config});
+
 const bot = new TelegramBot(config.token, { polling: true });
 const freshDate = Date.now();
 const actions = getActions({ bot });
