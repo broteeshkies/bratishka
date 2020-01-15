@@ -1,3 +1,4 @@
+import AdminAction from './AdminAction'
 import RepostAction from './RepostAction'
 import PrivateMessageAction from './PrivateMessageAction'
 import DeanonAction from './DeanonAction'
@@ -22,6 +23,7 @@ import TuesdayAction from './TuesdayAction';
 import WinAction from './WinAction';
 
 const actionClasses = [
+  AdminAction,
   InitAction,
   RepostAction,
   PrivateMessageAction,
