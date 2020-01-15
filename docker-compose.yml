@@ -13,8 +13,8 @@ services:
       #     cpus: "0.1"
       #     memory: 50M
     environment:
-      TOKEN: ${TOKEN}
-      FSQR_CLIENT_ID: ${FSQR_CLIENT_ID}
-      FSQR_CLIENT_SECRET: ${FSQR_CLIENT_SECRET}
+      config__token: ${config__token}
+      config__foursquare__clientId: ${config__foursquare__clientId}
+      config__foursquare__clientSecret: ${config__foursquare__clientSecret}
       SERVICE_NAME: "{{.Service.Name}}"
       TASK_SLOT: "{{.Task.Slot}}"
