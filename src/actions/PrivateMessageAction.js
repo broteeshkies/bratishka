@@ -1,15 +1,13 @@
-import Action from './Action';
-import get from 'lodash/get';
-import sample from 'lodash/sample';
-import { deanonVoteTime } from '../config/consts';
-import { mainChatId } from '../config/chats';
+import Action from "./Action";
+import { deanonVoteTime } from "../config/consts";
+import { mainChatId } from "../config/chats";
 
 export const anonMessages = {};
 
 export default class PrivateMessageAction extends Action {
   constructor(...args) {
     super(...args);
-    this.name = 'PrivateMessageAction';
+    this.name = "PrivateMessageAction";
   }
 
   test(message) {
@@ -17,14 +15,19 @@ export default class PrivateMessageAction extends Action {
   }
 
   async doAction(message) {
-    this.log('doAction');
-    const { username } = message.from;
+    this.log("doAction");
+    const anonUser = message.from;
     const sendedMessage = await this.repost({
       chatId: mainChatId,
-      message,
+      message
     });
     if (!sendedMessage) return;
-    anonMessages[sendedMessage.message_id] = { message, count: [], username };
+    anonMessages[sendedMessage.message_id] = {
+      message,
+      count: [],
+      anonUser,
+      deanons: []
+    };
     setTimeout(() => {
       delete anonMessages[sendedMessage.message_id];
     }, deanonVoteTime);

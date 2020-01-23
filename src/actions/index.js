@@ -21,6 +21,7 @@ import PolundraAction from './PolundraAction';
 import TodayAction from './TodayAction';
 import TuesdayAction from './TuesdayAction';
 import WinAction from './WinAction';
+import GetUserId from './GetUserId'
 
 const actionClasses = [
   AdminAction,
@@ -46,6 +47,7 @@ const actionClasses = [
   TodayAction,
   TuesdayAction,
   WinAction,
+  GetUserId,
 ];
 
 export default ({bot}) => actionClasses.map((ActionClass) => {
