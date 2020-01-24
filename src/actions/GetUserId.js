@@ -13,9 +13,19 @@ export default class GetUserId extends Action {
   doAction(message) {
     this.log("doAction");
     const reply = message.reply_to_message;
+    const chatId = message.chat.id;
+    let messageId = message.message_id;
+    let userId = message.from.id;
+
     if (reply) {
-      return this.bot.sendMessage(message.chat.id, reply.from.id);
+      userId = reply.from.id;
+      messageId = reply.message_id;
     }
-    this.bot.sendMessage(message.chat.id, message.from.id);
+
+    this.bot.sendMessage(chatId, userId,
+      {
+        reply_to_message_id: messageId,
+        parse_mode: "html"
+      });
   }
 }
