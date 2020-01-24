@@ -7,7 +7,7 @@ export default class GetUserId extends Action {
   }
 
   test(message) {
-    return this.testMessageRegExp(message, /(id|ид|айди)/);
+    return this.testMessageRegExp(message, /^(id|ид|айди)$/);
   }
 
   doAction(message) {
