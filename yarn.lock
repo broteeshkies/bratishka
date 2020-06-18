@@ -17,10 +17,10 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@lskjs/config@^0.35.103":
-  version "0.35.103"
-  resolved "https://registry.yarnpkg.com/@lskjs/config/-/config-0.35.103.tgz#7e27fa44e74bf148f9b8c932a39b89d41266f273"
-  integrity sha512-YaHc7i7yf1TUnBg7zu+PWe2Mc8EsYURkUhE1fUmNTAkLDn3o5lp6E+MryyQEnslCdn/gt476NQ5nP0eKhJOINw==
+"@lskjs/config@^0.35.122":
+  version "0.35.122"
+  resolved "https://registry.yarnpkg.com/@lskjs/config/-/config-0.35.122.tgz#c1dd077f74952d4de485bfecf70997337b1f81cd"
+  integrity sha512-ne4Cl335ZcPhZQn6nPJnna5RLPrcn0/nNh5L5qShRojY/4Y+6eMuawk+ioAPlVr//Bu6b/Za+zqoaWmnyP4c8Q==
   dependencies:
     lodash "^4.17.11"
 
@@ -3510,8 +3510,9 @@ string_decoder@~1.0.0:
     buffer-shims "~1.0.0"
 
 stringstream@~0.0.4, stringstream@~0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/stringstream/-/stringstream-0.0.5.tgz#4e484cd4de5a0bbbee18e46307710a8a81621878"
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/stringstream/-/stringstream-0.0.6.tgz#7880225b0d4ad10e30927d167a1d6f2fd3b33a72"
+  integrity sha512-87GEBAkegbBcweToUrdzf3eLhWNg06FJTebl4BVJz/JgWy8CvEr9dRtX5qWphiynMSQlxxi+QqN0z5T32SLlhA==
 
 strip-ansi@^3.0.0, strip-ansi@^3.0.1:
   version "3.0.1"
