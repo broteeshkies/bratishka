@@ -9,5 +9,5 @@ jobs:
       uses: appleboy/gitlab-ci-action@master
       with:
         url: "https://git.isuvorov.com"
-        token: ${{ secrets.TOKEN }}
+        token: ${{ secrets.GITLAB_TOKEN }}
         project_id: 19
