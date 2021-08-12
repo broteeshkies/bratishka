@@ -17,10 +17,10 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@lskjs/config@^0.35.103":
-  version "0.35.103"
-  resolved "https://registry.yarnpkg.com/@lskjs/config/-/config-0.35.103.tgz#7e27fa44e74bf148f9b8c932a39b89d41266f273"
-  integrity sha512-YaHc7i7yf1TUnBg7zu+PWe2Mc8EsYURkUhE1fUmNTAkLDn3o5lp6E+MryyQEnslCdn/gt476NQ5nP0eKhJOINw==
+"@lskjs/config@^0.35.122":
+  version "0.35.122"
+  resolved "https://registry.yarnpkg.com/@lskjs/config/-/config-0.35.122.tgz#c1dd077f74952d4de485bfecf70997337b1f81cd"
+  integrity sha512-ne4Cl335ZcPhZQn6nPJnna5RLPrcn0/nNh5L5qShRojY/4Y+6eMuawk+ioAPlVr//Bu6b/Za+zqoaWmnyP4c8Q==
   dependencies:
     lodash "^4.17.11"
 
@@ -2928,8 +2928,9 @@ path-key@^2.0.0:
   integrity sha1-QRyttXTFoUDTpLGRDUDYDMn0C0A=
 
 path-parse@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.5.tgz#3c1adf871ea9cd6c9431b6ea2bd74a0ff055c4c1"
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.7.tgz#fbc114b60ca42b30d9daf5858e4bd68bbedb6735"
+  integrity sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==
 
 performance-now@^0.2.0:
   version "0.2.0"
