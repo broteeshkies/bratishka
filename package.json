@@ -21,7 +21,7 @@
     "isomorphic-fetch": "2.2.1",
     "lodash": "4.17.11",
     "node-telegram-bot-api": "0.30.0",
-    "phpmorphy": "2.0.13",
+    "phpmorphy": "2.3.2",
     "querystring": "0.2.0"
   },
   "devDependencies": {
